@@ -193,6 +193,7 @@ GlassPane {
 
         RowLayout {
             Layout.fillWidth: true
+            Layout.rightMargin: 148
             spacing: 8
 
             Item { Layout.fillWidth: true }
