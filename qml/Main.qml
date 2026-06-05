@@ -38,7 +38,6 @@ ApplicationWindow {
         durationMs: Backend.rollDurationMs
         style: Backend.transitionStyle
         rollEnabled: Backend.rollEnabled
-        sourceLabel: bgmgr.sourceLabel
         active: !bgmgr.useGradientFallback
     }
 
@@ -50,8 +49,6 @@ ApplicationWindow {
         TitleBar {
             id: titleBar
             Layout.fillWidth: true
-            backgroundTier: bgmgr.activeTier
-            backgroundLabel: bgmgr.sourceLabel
         }
 
         SplitView {

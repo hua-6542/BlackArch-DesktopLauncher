@@ -25,7 +25,6 @@ Item {
     property int durationMs: 2000
     property string style: "fade"
     property bool rollEnabled: true
-    property string sourceLabel: ""
 
     // Whether the carousel should show its content.  The caller toggles this
     // when sources become populated / empty, triggering a smooth crossfade
@@ -100,30 +99,6 @@ Item {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // Source label — bottom-right badge
-    // ═══════════════════════════════════════════════════════════════════════════
-    Rectangle {
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: 160
-        anchors.bottomMargin: 12
-        width: badgeText.implicitWidth + 18
-        height: badgeText.implicitHeight + 10
-        radius: 7
-        color: Qt.rgba(0.03, 0.035, 0.06, 0.68)
-        border.color: Qt.rgba(1, 1, 1, 0.12)
-        border.width: 1
-        visible: root.sourceLabel !== ""
-
-        Text {
-            id: badgeText
-            anchors.centerIn: parent
-            text: root.sourceLabel
-            color: "#c0b0d8"
-            font.pixelSize: 12
-        }
-    }
-
     // ═══════════════════════════════════════════════════════════════════════════
     // Whole-carousel opacity — animated for smooth entrance / exit
     // ═══════════════════════════════════════════════════════════════════════════

@@ -17,7 +17,6 @@ Item {
     // ── Outputs consumed by BackgroundCarousel ─────────────────────────────────
 
     property var backgroundList: []
-    property string sourceLabel: ""
     // Start pessimistic — assume no images until scan confirms otherwise.
     // This gives a smooth gradient→wallpaper fade-in on startup.
     property bool useGradientFallback: true
@@ -52,13 +51,11 @@ Item {
             root.backgroundList = []
             root.useGradientFallback = true
             root.activeTier = 4
-            root.sourceLabel = "纯色渐变 (第 4 级回退)"
         } else {
             root.backgroundList = raw
             root.useGradientFallback = false
             root.activeTier = _classify(raw[0])
             var labels = ["", "合成壁纸 (第 1 级)", "用户壁纸 (第 2 级)", "内置备用 (第 3 级)", "纯色渐变 (第 4 级)"]
-            root.sourceLabel = labels[root.activeTier] || "未知来源"
         }
         if (root.activeTier !== root._lastTier) {
             root._lastTier = root.activeTier

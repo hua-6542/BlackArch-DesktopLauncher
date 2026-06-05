@@ -12,8 +12,6 @@ Item {
     implicitHeight: 48
 
     property alias searchText: searchField.text
-    property int backgroundTier: 1
-    property string backgroundLabel: ""
 
     RowLayout {
         anchors.fill: parent
@@ -49,32 +47,6 @@ Item {
         }
 
         Item { Layout.fillWidth: true }
-
-        // Background tier badge — shows which fallback level is active.
-        Rectangle {
-            Layout.preferredWidth: tierLabel.implicitWidth + 14
-            Layout.preferredHeight: 24
-            radius: 6
-            color: Qt.rgba(0.1, 0.1, 0.18, 0.6)
-            border.color: {
-                if (root.backgroundTier === 1) return "#3da556";
-                if (root.backgroundTier === 2) return "#5b8def";
-                if (root.backgroundTier === 3) return "#f5b041";
-                return "#9b6dff";
-            }
-            border.width: 1
-            visible: root.backgroundLabel !== ""
-
-            Text {
-                id: tierLabel
-                anchors.centerIn: parent
-                text: root.backgroundTier >= 4 ? "第 4 级" : "第 " + root.backgroundTier + " 级"
-                color: "#c0b0d8"
-                font.pixelSize: 11
-            }
-        }
-
-        Item { Layout.preferredWidth: 8 }
 
         Rectangle {
             Layout.preferredWidth: 280
