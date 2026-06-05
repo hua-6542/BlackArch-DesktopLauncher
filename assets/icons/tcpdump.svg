@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="dbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5cd8ff"/>
+      <stop offset="1" stop-color="#1a6f9c"/>
+    </linearGradient>
+    <linearGradient id="wing1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a8eaff" stop-opacity="0.3"/>
+      <stop offset="0.5" stop-color="#5cd8ff" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#a8eaff" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="14" cy="22" rx="12" ry="5" fill="url(#wing1)" stroke="#1a6f9c" stroke-width="1" transform="rotate(-20 14 22)"/>
+  <ellipse cx="50" cy="22" rx="12" ry="5" fill="url(#wing1)" stroke="#1a6f9c" stroke-width="1" transform="rotate(20 50 22)"/>
+  <ellipse cx="14" cy="42" rx="11" ry="4" fill="url(#wing1)" stroke="#1a6f9c" stroke-width="1" transform="rotate(20 14 42)"/>
+  <ellipse cx="50" cy="42" rx="11" ry="4" fill="url(#wing1)" stroke="#1a6f9c" stroke-width="1" transform="rotate(-20 50 42)"/>
+  <line x1="6" y1="20" x2="22" y2="22" stroke="#1a6f9c" stroke-width="0.6"/>
+  <line x1="6" y1="24" x2="22" y2="22" stroke="#1a6f9c" stroke-width="0.6"/>
+  <line x1="42" y1="22" x2="58" y2="20" stroke="#1a6f9c" stroke-width="0.6"/>
+  <line x1="42" y1="22" x2="58" y2="24" stroke="#1a6f9c" stroke-width="0.6"/>
+  <ellipse cx="32" cy="32" rx="3.5" ry="22" fill="url(#dbody)" stroke="#0a3a52" stroke-width="1.2"/>
+  <ellipse cx="32" cy="20" rx="2" ry="10" fill="#fff" fill-opacity="0.3"/>
+  <line x1="32" y1="22" x2="32" y2="50" stroke="#0a3a52" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <circle cx="32" cy="11" r="4" fill="#0a3a52" stroke="#5cd8ff" stroke-width="1"/>
+  <circle cx="30.5" cy="10" r="1" fill="#5cd8ff"/>
+  <circle cx="33.5" cy="10" r="1" fill="#5cd8ff"/>
+  <line x1="30" y1="8" x2="26" y2="3" stroke="#0a3a52" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="34" y1="8" x2="38" y2="3" stroke="#0a3a52" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="14" y="24" font-family="monospace" font-size="3.5" fill="#0a3a52" font-weight="bold">10</text>
+  <text x="48" y="24" font-family="monospace" font-size="3.5" fill="#0a3a52" font-weight="bold">01</text>
+  <text x="14" y="44" font-family="monospace" font-size="3.5" fill="#0a3a52" font-weight="bold">11</text>
+  <text x="48" y="44" font-family="monospace" font-size="3.5" fill="#0a3a52" font-weight="bold">00</text>
+</svg>

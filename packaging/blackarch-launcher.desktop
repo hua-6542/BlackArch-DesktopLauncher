@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=BlackArch 工具启动器
+GenericName=BlackArch Tool Launcher
+Comment=Modern Qt6/QML launcher for BlackArch distrobox tools (Rick & Morty themed)
+Exec=blackarch-launcher
+Icon=blackarch-launcher
+Terminal=false
+Categories=Security;Utility;
+Keywords=blackarch;security;pentest;launcher;
+StartupNotify=true

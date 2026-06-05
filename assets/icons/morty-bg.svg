@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="mortyhair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8965a"/>
+      <stop offset="1" stop-color="#7a4f1c"/>
+    </linearGradient>
+    <linearGradient id="mortyface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0d4"/>
+      <stop offset="1" stop-color="#e8c896"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="1" stop-color="#a16207"/>
+    </linearGradient>
+    <linearGradient id="jeans" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b8def"/>
+      <stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <radialGradient id="portal" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#86efac"/>
+      <stop offset="0.6" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#0a3a1a"/>
+    </radialGradient>
+  </defs>
+  <!-- Portal 背景效果 -->
+  <ellipse cx="200" cy="60" rx="50" ry="45" fill="url(#portal)" opacity="0.85"/>
+  <ellipse cx="200" cy="60" rx="40" ry="35" fill="none" stroke="#86efac" stroke-width="2" opacity="0.7"/>
+  <ellipse cx="200" cy="60" rx="30" ry="26" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="200" cy="60" rx="20" ry="16" fill="#22c55e" opacity="0.6"/>
+  <!-- portal 旋涡花纹 -->
+  <path d="M200 30 Q220 50 200 80 Q180 50 200 30 Z" fill="#a4f08a" opacity="0.4"/>
+  <path d="M180 60 Q200 40 220 60 Q200 80 180 60 Z" fill="#86efac" opacity="0.5"/>
+
+  <!-- 莫蒂身体 -->
+  <!-- 腿 -->
+  <rect x="100" y="200" width="22" height="50" rx="4" fill="url(#jeans)" stroke="#0a1a4a" stroke-width="2"/>
+  <rect x="135" y="200" width="22" height="50" rx="4" fill="url(#jeans)" stroke="#0a1a4a" stroke-width="2"/>
+  <!-- 鞋 -->
+  <ellipse cx="111" cy="252" rx="14" ry="5" fill="#5e3a06" stroke="#3a1d04" stroke-width="1.5"/>
+  <ellipse cx="146" cy="252" rx="14" ry="5" fill="#5e3a06" stroke="#3a1d04" stroke-width="1.5"/>
+  <!-- 黄T恤 -->
+  <path d="M75 130 Q90 110 128 110 Q166 110 181 130 L181 210 Q160 215 128 215 Q96 215 75 210 Z"
+        fill="url(#shirt)" stroke="#7c5a06" stroke-width="2"/>
+  <!-- T恤褶皱 -->
+  <path d="M85 170 Q90 175 95 170" fill="none" stroke="#a16207" stroke-width="1" opacity="0.5"/>
+  <path d="M165 170 Q170 175 175 170" fill="none" stroke="#a16207" stroke-width="1" opacity="0.5"/>
+  <path d="M128 130 Q128 200" stroke="#a16207" stroke-width="1" opacity="0.4"/>
+  <!-- 手臂 -->
+  <path d="M75 130 Q60 150 60 180 Q60 200 70 215 Q80 218 85 210 Q70 195 75 180 L80 160" fill="url(#shirt)" stroke="#7c5a06" stroke-width="2"/>
+  <path d="M181 130 Q196 150 196 180 Q196 200 186 215 Q176 218 171 210 Q186 195 181 180 L176 160" fill="url(#shirt)" stroke="#7c5a06" stroke-width="2"/>
+  <!-- 手 -->
+  <ellipse cx="78" cy="213" rx="9" ry="11" fill="url(#mortyface)" stroke="#7a5a3a" stroke-width="1.5"/>
+  <ellipse cx="178" cy="213" rx="9" ry="11" fill="url(#mortyface)" stroke="#7a5a3a" stroke-width="1.5"/>
+
+  <!-- 脖子 -->
+  <rect x="116" y="100" width="24" height="20" fill="url(#mortyface)" stroke="#7a5a3a" stroke-width="1.5"/>
+
+  <!-- 头部 -->
+  <ellipse cx="128" cy="70" rx="48" ry="50" fill="url(#mortyface)" stroke="#7a5a3a" stroke-width="2"/>
+  <!-- 棕色头发（蓬松刘海） -->
+  <path d="M82 50 Q88 26 110 22 Q120 14 128 18 Q138 14 150 24 Q170 30 174 52 Q170 38 152 38 Q140 32 128 38 Q116 32 100 40 Q88 42 82 50 Z"
+        fill="url(#mortyhair)" stroke="#3a1d04" stroke-width="1.5"/>
+  <!-- 发丝 -->
+  <path d="M95 38 L100 28" stroke="#3a1d04" stroke-width="1" opacity="0.6"/>
+  <path d="M115 30 L118 24" stroke="#3a1d04" stroke-width="1" opacity="0.6"/>
+  <path d="M140 28 L144 22" stroke="#3a1d04" stroke-width="1" opacity="0.6"/>
+  <path d="M160 36 L164 28" stroke="#3a1d04" stroke-width="1" opacity="0.6"/>
+  <!-- 眉毛 -->
+  <path d="M98 60 Q108 56 118 60" stroke="#3a1d04" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M138 60 Q148 56 158 60" stroke="#3a1d04" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 大眼 -->
+  <ellipse cx="108" cy="72" rx="10" ry="13" fill="#fff" stroke="#3a3a3a" stroke-width="1.5"/>
+  <ellipse cx="148" cy="72" rx="10" ry="13" fill="#fff" stroke="#3a3a3a" stroke-width="1.5"/>
+  <!-- 黑色瞳孔 -->
+  <circle cx="108" cy="76" r="4" fill="#0a0a0a"/>
+  <circle cx="148" cy="76" r="4" fill="#0a0a0a"/>
+  <circle cx="109" cy="74" r="1.5" fill="#fff"/>
+  <circle cx="149" cy="74" r="1.5" fill="#fff"/>
+  <!-- 鼻子 -->
+  <path d="M124 80 Q128 90 132 80 Q130 86 128 86 Q126 86 124 80" fill="#d4a872" stroke="#7a5a3a" stroke-width="1"/>
+  <!-- 张开的焦虑嘴 -->
+  <ellipse cx="128" cy="100" rx="14" ry="6" fill="#3a0a0a" stroke="#3a3a3a" stroke-width="1.5"/>
+  <ellipse cx="128" cy="98" rx="10" ry="3" fill="#fff" opacity="0.85"/>
+  <line x1="120" y1="98" x2="136" y2="98" stroke="#7a7a7a" stroke-width="0.6"/>
+  <line x1="123" y1="95" x2="123" y2="101" stroke="#7a7a7a" stroke-width="0.6"/>
+  <line x1="128" y1="95" x2="128" y2="101" stroke="#7a7a7a" stroke-width="0.6"/>
+  <line x1="133" y1="95" x2="133" y2="101" stroke="#7a7a7a" stroke-width="0.6"/>
+  <!-- 汗珠 -->
+  <ellipse cx="80" cy="55" rx="3" ry="5" fill="#a8eaff" opacity="0.85"/>
+  <ellipse cx="172" cy="60" rx="2.5" ry="4" fill="#a8eaff" opacity="0.85"/>
+  <!-- "Oh geez" 文字气泡感 -->
+  <text x="40" y="100" font-family="Comic Sans MS, sans-serif" font-size="14" fill="#dc2626" font-weight="bold" opacity="0.85" transform="rotate(-8 40 100)">Oh geez!</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="oct" cx="0.5" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#831843"/>
+    </radialGradient>
+    <linearGradient id="tent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 32 Q18 42 10 46 Q4 50 8 56" fill="none" stroke="url(#tent)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M28 34 Q26 46 20 52 Q16 56 22 60" fill="none" stroke="url(#tent)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M32 34 L32 50 Q32 56 28 58" fill="none" stroke="url(#tent)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M36 34 Q38 46 44 52 Q48 56 42 60" fill="none" stroke="url(#tent)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M42 32 Q46 42 54 46 Q60 50 56 56" fill="none" stroke="url(#tent)" stroke-width="3.5" stroke-linecap="round"/>
+  <ellipse cx="32" cy="22" rx="14" ry="12" fill="url(#oct)" stroke="#5d0e2e" stroke-width="1.5"/>
+  <ellipse cx="32" cy="18" rx="12" ry="6" fill="#fff" fill-opacity="0.25"/>
+  <circle cx="26" cy="20" r="2.5" fill="#fff"/>
+  <circle cx="26" cy="20" r="1.2" fill="#0a0a0a"/>
+  <circle cx="38" cy="20" r="2.5" fill="#fff"/>
+  <circle cx="38" cy="20" r="1.2" fill="#0a0a0a"/>
+  <circle cx="8" cy="56" r="2.5" fill="#22d3ee" stroke="#0e7490" stroke-width="0.8"/>
+  <circle cx="22" cy="60" r="2.5" fill="#22d3ee" stroke="#0e7490" stroke-width="0.8"/>
+  <circle cx="28" cy="58" r="2.5" fill="#22d3ee" stroke="#0e7490" stroke-width="0.8"/>
+  <circle cx="42" cy="60" r="2.5" fill="#22d3ee" stroke="#0e7490" stroke-width="0.8"/>
+  <circle cx="56" cy="56" r="2.5" fill="#22d3ee" stroke="#0e7490" stroke-width="0.8"/>
+  <path d="M28 26 Q32 28 36 26" fill="none" stroke="#5d0e2e" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="32" y="14" text-anchor="middle" font-family="monospace" font-size="4" fill="#fff" font-weight="bold">DNS</text>
+</svg>

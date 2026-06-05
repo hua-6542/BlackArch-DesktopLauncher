@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="rickhair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4e9ff"/>
+      <stop offset="1" stop-color="#7ab8ff"/>
+    </linearGradient>
+    <linearGradient id="rickface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff5e1"/>
+      <stop offset="1" stop-color="#e8c8a0"/>
+    </linearGradient>
+    <linearGradient id="lab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset="1" stop-color="#bababa"/>
+    </linearGradient>
+  </defs>
+  <!-- 实验室白大褂衣领 -->
+  <path d="M14 54 L20 46 L32 50 L44 46 L50 54 L50 60 L14 60 Z"
+        fill="url(#lab)" stroke="#3a3a3a" stroke-width="1.2"/>
+  <line x1="32" y1="50" x2="32" y2="60" stroke="#7a7a7a" stroke-width="0.8"/>
+  <!-- 蓝色头发：尖刺 zigzag -->
+  <path d="M14 22 L17 8 L20 18 L23 6 L26 16 L29 4 L32 14 L35 4 L38 16 L41 6 L44 18 L47 8 L50 22
+           Q50 24 48 24 L16 24 Q14 24 14 22 Z"
+        fill="url(#rickhair)" stroke="#1f6feb" stroke-width="1.4" stroke-linejoin="round"/>
+  <!-- 脸 -->
+  <path d="M16 24 Q14 30 16 36 Q14 44 18 48 Q22 52 32 52 Q42 52 46 48 Q50 44 48 36 Q50 30 48 24 Z"
+        fill="url(#rickface)" stroke="#7a5a3a" stroke-width="1.2"/>
+  <!-- 单字眉 -->
+  <path d="M18 28 Q22 26 28 28 Q32 27 36 28 Q42 26 46 28" stroke="#3a3a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 大白眼 -->
+  <ellipse cx="22" cy="34" rx="6" ry="5" fill="#fff" stroke="#3a3a3a" stroke-width="1"/>
+  <ellipse cx="42" cy="34" rx="6" ry="5" fill="#fff" stroke="#3a3a3a" stroke-width="1"/>
+  <!-- 黑色小瞳孔（瑞克的标志性表情） -->
+  <circle cx="23" cy="34" r="1.4" fill="#0a0a0a"/>
+  <circle cx="41" cy="34" r="1.4" fill="#0a0a0a"/>
+  <circle cx="23.5" cy="33.5" r="0.5" fill="#fff"/>
+  <circle cx="41.5" cy="33.5" r="0.5" fill="#fff"/>
+  <!-- 大鼻子 -->
+  <path d="M30 36 Q32 42 34 36" fill="#d4a872" stroke="#7a5a3a" stroke-width="0.8"/>
+  <!-- 张开的嘴+牙 -->
+  <path d="M24 44 Q32 50 40 44 L38 47 L26 47 Z" fill="#3a0a0a" stroke="#3a3a3a" stroke-width="1"/>
+  <rect x="28" y="44" width="8" height="2" fill="#fff" stroke="#7a7a7a" stroke-width="0.4"/>
+  <line x1="30" y1="44" x2="30" y2="46" stroke="#7a7a7a" stroke-width="0.4"/>
+  <line x1="32" y1="44" x2="32" y2="46" stroke="#7a7a7a" stroke-width="0.4"/>
+  <line x1="34" y1="44" x2="34" y2="46" stroke="#7a7a7a" stroke-width="0.4"/>
+  <!-- 流口水 -->
+  <path d="M38 47 Q40 50 39 54" stroke="#a8eaff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="39" cy="54" r="1.2" fill="#a8eaff"/>
+  <!-- 头发高光 -->
+  <path d="M20 12 L23 18 L26 12" fill="#fff" fill-opacity="0.5"/>
+  <path d="M40 12 L43 18 L46 12" fill="#fff" fill-opacity="0.4"/>
+</svg>

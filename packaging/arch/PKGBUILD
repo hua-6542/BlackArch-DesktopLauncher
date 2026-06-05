@@ -1,0 +1,31 @@
+# Maintainer: Karen <karen@localhost>
+# Contributor: BlackArch Launcher contributors
+
+pkgname=blackarch-launcher
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Modern Qt6/QML tool launcher for BlackArch distrobox (Rick & Morty themed)"
+arch=('x86_64')
+url="https://github.com/user/blackarch-launcher-qt"
+license=('MIT')
+depends=('qt6-base' 'qt6-declarative' 'qt6-svg' 'qt6-imageformats')
+makedepends=('cmake' 'gcc' 'qt6-tools')
+provides=('blackarch-launcher')
+conflicts=('blackarch-launcher-git')
+source=("${pkgname}-${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    cmake -S . -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr
+    cmake --build build -j
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    DESTDIR="${pkgdir}" cmake --install build
+}
+
+# vim:set ts=4 sw=4 et:

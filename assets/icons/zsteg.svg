@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="0.5" stop-color="#a16207"/>
+      <stop offset="1" stop-color="#5e3a06"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.5" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b1474"/>
+      <stop offset="1" stop-color="#0a0a1f"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="10" width="52" height="44" rx="2" fill="url(#frame)" stroke="#3a1d04" stroke-width="1.5"/>
+  <rect x="10" y="14" width="44" height="36" fill="url(#sky)" stroke="#3a1d04" stroke-width="0.8"/>
+  <circle cx="44" cy="22" r="4" fill="#fde68a" opacity="0.9"/>
+  <circle cx="44" cy="22" r="6" fill="#fde68a" opacity="0.3"/>
+  <polygon points="10,50 18,32 24,40 32,28 40,42 48,34 54,50" fill="url(#mtn)"/>
+  <line x1="10" y1="50" x2="54" y2="50" stroke="#0a0a1f" stroke-width="0.8"/>
+  <path d="M48 42 L54 38 L54 50 Q50 46 48 50 Z" fill="#1a1a1a" stroke="#3a1d04" stroke-width="1"/>
+  <path d="M48 42 L52 41 L51 44 Z" fill="#fde68a" opacity="0.4"/>
+  <text x="50" y="48" font-family="monospace" font-size="3" fill="#22c55e" font-weight="bold">10</text>
+  <text x="49" y="46" font-family="monospace" font-size="2.5" fill="#22c55e">01</text>
+  <g transform="translate(8 52)">
+    <text x="0" y="0" font-family="monospace" font-size="3" fill="#22c55e" opacity="0.7">0110</text>
+    <text x="14" y="0" font-family="monospace" font-size="3" fill="#22c55e" opacity="0.5">1001</text>
+    <text x="28" y="0" font-family="monospace" font-size="3" fill="#22c55e" opacity="0.7">0110</text>
+    <text x="42" y="0" font-family="monospace" font-size="3" fill="#22c55e" opacity="0.5">10</text>
+  </g>
+  <text x="58" y="58" font-family="monospace" font-size="3" fill="#22c55e" opacity="0.6">.</text>
+  <line x1="50" y1="42" x2="58" y2="56" stroke="#22c55e" stroke-width="0.6" opacity="0.5" stroke-dasharray="1,1"/>
+  <text x="12" y="20" font-family="monospace" font-size="3.5" fill="#22c55e" font-weight="bold" opacity="0.85">PNG</text>
+  <rect x="10" y="14" width="44" height="36" fill="none" stroke="#fbbf24" stroke-width="0.5" opacity="0.5"/>
+</svg>

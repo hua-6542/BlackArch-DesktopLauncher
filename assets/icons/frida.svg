@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="frGhost" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#3b1474"/>
+    </radialGradient>
+    <linearGradient id="frNeedle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset="1" stop-color="#6b7280"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g font-family="monospace" font-size="2.4" fill="#a78bfa" opacity="0.5">
+    <text x="2" y="6">Java.perform()</text>
+    <text x="2" y="10">Interceptor.attach</text>
+    <text x="2" y="14">Module.findExport</text>
+    <text x="2" y="58">onEnter: function</text>
+    <text x="2" y="62">onLeave: this.r0</text>
+  </g>
+  <path d="M14 22 Q14 8 32 8 Q50 8 50 22 L50 50 L43 46 L38 52 L32 46 L26 52 L21 46 L14 50 Z"
+        fill="url(#frGhost)" stroke="#1f0a4a" stroke-width="1.5"/>
+  <ellipse cx="25" cy="22" rx="3.5" ry="4" fill="#fff" stroke="#0a0a0a" stroke-width="0.6"/>
+  <ellipse cx="39" cy="22" rx="3.5" ry="4" fill="#fff" stroke="#0a0a0a" stroke-width="0.6"/>
+  <circle cx="26" cy="23" r="1.5" fill="#0a0a0a"/>
+  <circle cx="40" cy="23" r="1.5" fill="#0a0a0a"/>
+  <circle cx="26.4" cy="22.6" r="0.5" fill="#fff"/>
+  <circle cx="40.4" cy="22.6" r="0.5" fill="#fff"/>
+  <path d="M28 32 Q32 36 36 32" fill="none" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round"/>
+  <g transform="translate(54 14) rotate(45)">
+    <rect x="-0.8" y="-2" width="1.6" height="22" fill="url(#frNeedle)" stroke="#374151" stroke-width="0.4"/>
+    <polygon points="-1.4,20 1.4,20 0,24" fill="#9ca3af" stroke="#374151" stroke-width="0.4"/>
+    <rect x="-2" y="-7" width="4" height="6" fill="#fbbf24" stroke="#a16207" stroke-width="0.6"/>
+    <circle cx="0" cy="-7" r="2.2" fill="#dc2626" stroke="#7f1d1d" stroke-width="0.6"/>
+  </g>
+  <text x="32" y="44" text-anchor="middle" font-family="monospace" font-size="3.5" fill="#22c55e" font-weight="bold">hook()</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bgdb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b3fb8"/>
+      <stop offset="1" stop-color="#2a1554"/>
+    </linearGradient>
+    <linearGradient id="bbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9d6bd8"/>
+      <stop offset="1" stop-color="#3a1f6b"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="32" cy="40" rx="14" ry="18" fill="url(#bbody)" stroke="#1a0a3a" stroke-width="1.5"/>
+  <ellipse cx="32" cy="40" rx="14" ry="18" fill="url(#bgdb)" fill-opacity="0.6"/>
+  <ellipse cx="32" cy="30" rx="14" ry="6" fill="#fff" fill-opacity="0.18"/>
+  <line x1="32" y1="22" x2="32" y2="58" stroke="#1a0a3a" stroke-width="1.5"/>
+  <line x1="26" y1="34" x2="38" y2="34" stroke="#1a0a3a" stroke-width="1"/>
+  <line x1="24" y1="42" x2="40" y2="42" stroke="#1a0a3a" stroke-width="1"/>
+  <line x1="26" y1="50" x2="38" y2="50" stroke="#1a0a3a" stroke-width="1"/>
+  <circle cx="32" cy="22" r="8" fill="url(#bbody)" stroke="#1a0a3a" stroke-width="1.5"/>
+  <circle cx="29" cy="21" r="2" fill="#ff5555"/>
+  <circle cx="35" cy="21" r="2" fill="#ff5555"/>
+  <circle cx="29" cy="21" r="0.8" fill="#fff"/>
+  <circle cx="35" cy="21" r="0.8" fill="#fff"/>
+  <line x1="28" y1="16" x2="22" y2="8" stroke="#1a0a3a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="16" x2="42" y2="8" stroke="#1a0a3a" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="22" cy="8" r="1.5" fill="#ff5555"/>
+  <circle cx="42" cy="8" r="1.5" fill="#ff5555"/>
+  <line x1="20" y1="30" x2="8" y2="22" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="44" y1="30" x2="56" y2="22" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="18" y1="40" x2="4" y2="40" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="46" y1="40" x2="60" y2="40" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="20" y1="50" x2="8" y2="58" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="44" y1="50" x2="56" y2="58" stroke="#1a0a3a" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="spider" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#7f1d1d"/>
+      <stop offset="1" stop-color="#1f0a0a"/>
+    </radialGradient>
+    <linearGradient id="server" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9ca3af"/>
+      <stop offset="1" stop-color="#374151"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#52525b" stroke-width="0.6" fill="none">
+    <path d="M2 6 Q12 12 24 6"/>
+    <path d="M2 14 Q12 22 28 12"/>
+    <path d="M2 22 Q14 30 28 18"/>
+    <path d="M2 30 Q14 38 28 24"/>
+    <line x1="14" y1="3" x2="14" y2="22"/>
+    <line x1="20" y1="3" x2="20" y2="22"/>
+  </g>
+  <g transform="translate(40 38)">
+    <rect x="-8" y="-10" width="16" height="20" rx="1" fill="url(#server)" stroke="#1f2937" stroke-width="1"/>
+    <rect x="-6" y="-7" width="12" height="2" fill="#22c55e" rx="0.4"/>
+    <rect x="-6" y="-3" width="12" height="2" fill="#fbbf24" rx="0.4"/>
+    <rect x="-6" y="1" width="12" height="2" fill="#22d3ee" rx="0.4"/>
+    <circle cx="6" cy="6" r="0.8" fill="#22c55e"/>
+    <text x="-6" y="-7.4" font-family="monospace" font-size="2.4" fill="#0a0a0a" font-weight="bold">HTTP</text>
+  </g>
+  <g transform="translate(20 28)">
+    <ellipse cx="0" cy="0" rx="6" ry="5" fill="url(#spider)" stroke="#0a0a0a" stroke-width="1"/>
+    <ellipse cx="0" cy="-4" rx="4" ry="3" fill="url(#spider)" stroke="#0a0a0a" stroke-width="0.8"/>
+    <circle cx="-1.5" cy="-4" r="0.8" fill="#dc2626"/>
+    <circle cx="1.5" cy="-4" r="0.8" fill="#dc2626"/>
+    <g stroke="#0a0a0a" stroke-width="1" fill="none" stroke-linecap="round">
+      <path d="M-5 -2 Q-10 -6 -12 -2"/>
+      <path d="M-6 0 Q-12 0 -14 4"/>
+      <path d="M-6 2 Q-12 4 -12 8"/>
+      <path d="M-5 4 Q-10 8 -8 12"/>
+      <path d="M5 -2 Q10 -6 12 -2"/>
+      <path d="M6 0 Q12 0 14 4"/>
+      <path d="M6 2 Q12 4 12 8"/>
+      <path d="M5 4 Q10 8 8 12"/>
+    </g>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="5" fill="#dc2626" font-weight="bold">nikto</text>
+</svg>

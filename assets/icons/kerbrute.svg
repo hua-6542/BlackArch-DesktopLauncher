@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="cerb" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#52525b"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="1" stop-color="#dc2626"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 50 L14 56 L20 56 L22 56 Z" fill="#3a0a0a"/>
+  <path d="M42 50 L50 56 L44 56 L42 56 Z" fill="#3a0a0a"/>
+  <ellipse cx="32" cy="46" rx="18" ry="10" fill="url(#cerb)" stroke="#0a0a0a" stroke-width="1.5"/>
+  <path d="M16 42 Q12 38 16 34 Q14 28 20 26 Q22 18 28 22 Q32 16 32 22 L32 30 Q26 32 22 36 Q18 40 16 42 Z" fill="url(#cerb)" stroke="#0a0a0a" stroke-width="1.2"/>
+  <ellipse cx="22" cy="32" rx="2.4" ry="3" fill="#fff"/>
+  <circle cx="22" cy="33" r="1.2" fill="#dc2626"/>
+  <path d="M48 42 Q52 38 48 34 Q50 28 44 26 Q42 18 36 22 Q32 16 32 22 L32 30 Q38 32 42 36 Q46 40 48 42 Z" fill="url(#cerb)" stroke="#0a0a0a" stroke-width="1.2"/>
+  <ellipse cx="42" cy="32" rx="2.4" ry="3" fill="#fff"/>
+  <circle cx="42" cy="33" r="1.2" fill="#dc2626"/>
+  <path d="M26 24 Q26 14 32 12 Q38 14 38 24 L38 36 Q32 40 26 36 Z" fill="url(#cerb)" stroke="#0a0a0a" stroke-width="1.5"/>
+  <ellipse cx="29" cy="22" rx="2.4" ry="3" fill="#fff"/>
+  <ellipse cx="35" cy="22" rx="2.4" ry="3" fill="#fff"/>
+  <circle cx="29" cy="23" r="1.2" fill="#fbbf24"/>
+  <circle cx="35" cy="23" r="1.2" fill="#fbbf24"/>
+  <path d="M28 14 L26 8 L29 12 M36 14 L38 8 L35 12" stroke="#52525b" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+  <path d="M30 28 L32 32 L34 28 Z" fill="#fff" stroke="#0a0a0a" stroke-width="0.4"/>
+  <path d="M28 30 Q32 34 36 30" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+  <g transform="translate(52 16)">
+    <path d="M0 6 Q-3 0 0 -6 Q3 0 6 -4 Q3 4 0 6 Z" fill="url(#flame)" stroke="#7f1d1d" stroke-width="0.6"/>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="4.5" fill="#dc2626" font-weight="bold">KRB5</text>
+</svg>

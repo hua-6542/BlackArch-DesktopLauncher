@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="net" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9ca3af"/>
+      <stop offset="1" stop-color="#374151"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#0a2540" stroke-width="0.8">
+    <line x1="14" y1="14" x2="32" y2="28"/>
+    <line x1="50" y1="14" x2="32" y2="28"/>
+    <line x1="14" y1="50" x2="32" y2="28"/>
+    <line x1="50" y1="50" x2="32" y2="28"/>
+    <line x1="14" y1="14" x2="50" y2="14"/>
+    <line x1="14" y1="50" x2="50" y2="50"/>
+    <line x1="14" y1="14" x2="14" y2="50"/>
+    <line x1="50" y1="14" x2="50" y2="50"/>
+  </g>
+  <g fill="url(#net)" stroke="#0a2540" stroke-width="1">
+    <circle cx="14" cy="14" r="4"/>
+    <circle cx="50" cy="14" r="4"/>
+    <circle cx="14" cy="50" r="4"/>
+    <circle cx="50" cy="50" r="4"/>
+  </g>
+  <circle cx="32" cy="28" r="6" fill="#dc2626" stroke="#7f1d1d" stroke-width="1"/>
+  <text x="32" y="30" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff" font-weight="bold">!</text>
+  <g transform="translate(48 40) rotate(35)">
+    <rect x="-1.5" y="-2" width="3" height="20" fill="#a16207" stroke="#3a1d04" stroke-width="0.6"/>
+    <rect x="-7" y="-7" width="14" height="9" rx="1" fill="url(#hammer)" stroke="#1f2937" stroke-width="0.8"/>
+    <rect x="5" y="-5" width="3" height="5" fill="#374151"/>
+    <line x1="-5" y1="-5" x2="-5" y2="-1" stroke="#1f2937" stroke-width="0.6"/>
+    <line x1="-2" y1="-5" x2="-2" y2="-1" stroke="#1f2937" stroke-width="0.6"/>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="4.5" fill="#22d3ee" font-weight="bold">netexec</text>
+</svg>

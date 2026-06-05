@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="slBlade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e5e7eb"/>
+      <stop offset="0.6" stop-color="#9ca3af"/>
+      <stop offset="1" stop-color="#374151"/>
+    </linearGradient>
+    <linearGradient id="slGrip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#3a0a0a"/>
+    </linearGradient>
+    <radialGradient id="slDrop" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#7f1d1d"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g font-family="monospace" font-size="2.4" fill="#22c55e" opacity="0.5">
+    <text x="2" y="6">[server] sessions</text>
+    <text x="2" y="10">[implant] beacon-32</text>
+    <text x="2" y="14">[c2] mtls://...</text>
+    <text x="2" y="62">[+] callback rcvd</text>
+  </g>
+  <g transform="translate(32 40) rotate(-25)">
+    <rect x="-1.5" y="-22" width="3" height="20" fill="url(#slBlade)" stroke="#1f2937" stroke-width="0.6"/>
+    <polygon points="-1.5,-22 1.5,-22 0,-28" fill="url(#slBlade)" stroke="#1f2937" stroke-width="0.6"/>
+    <line x1="0" y1="-26" x2="0" y2="-4" stroke="#0a0a0a" stroke-width="0.4" opacity="0.5"/>
+    <rect x="-7" y="-2" width="14" height="2.4" fill="#fbbf24" stroke="#a16207" stroke-width="0.6"/>
+    <rect x="-2.6" y="0.4" width="5.2" height="11" rx="0.6" fill="url(#slGrip)" stroke="#1f0a0a" stroke-width="0.6"/>
+    <line x1="-2.6" y1="3" x2="2.6" y2="3" stroke="#1f0a0a" stroke-width="0.4"/>
+    <line x1="-2.6" y1="6" x2="2.6" y2="6" stroke="#1f0a0a" stroke-width="0.4"/>
+    <line x1="-2.6" y1="9" x2="2.6" y2="9" stroke="#1f0a0a" stroke-width="0.4"/>
+  </g>
+  <ellipse cx="36" cy="22" rx="1.4" ry="2" fill="url(#slDrop)" stroke="#7f1d1d" stroke-width="0.4"/>
+  <ellipse cx="42" cy="32" rx="1.2" ry="1.6" fill="url(#slDrop)" stroke="#7f1d1d" stroke-width="0.4"/>
+  <g transform="translate(10 50)">
+    <rect x="0" y="0" width="10" height="7" rx="0.6" fill="#0d1117" stroke="#22c55e" stroke-width="0.6"/>
+    <text x="1" y="5" font-family="monospace" font-size="3" fill="#22c55e">&gt;_</text>
+  </g>
+  <text x="32" y="60" text-anchor="middle" font-family="monospace" font-size="3.6" fill="#dc2626" font-weight="bold">SLIVER C2</text>
+</svg>

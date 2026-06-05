@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="tdDisk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#374151"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <radialGradient id="tdPlatter" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#9ca3af"/>
+      <stop offset="0.7" stop-color="#4b5563"/>
+      <stop offset="1" stop-color="#1f2937"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g font-family="monospace" font-size="2.4" fill="#22c55e" opacity="0.5">
+    <text x="2" y="6">SECTOR 0x40A1</text>
+    <text x="2" y="10">recovering...</text>
+    <text x="2" y="14">MFT: rebuild</text>
+    <text x="2" y="58">part: NTFS+ext4</text>
+    <text x="2" y="62">[OK] 89 files</text>
+  </g>
+  <g transform="translate(32 30)">
+    <rect x="-18" y="-12" width="36" height="22" rx="2" fill="url(#tdDisk)" stroke="#0a0a0a" stroke-width="1"/>
+    <circle cx="0" cy="-1" r="9" fill="url(#tdPlatter)" stroke="#0a0a0a" stroke-width="0.6"/>
+    <circle cx="0" cy="-1" r="2" fill="#0a0a0a"/>
+    <circle cx="0" cy="-1" r="0.6" fill="#fde047"/>
+    <g stroke="#1f2937" stroke-width="0.3" fill="none" opacity="0.6">
+      <circle cx="0" cy="-1" r="3.5"/>
+      <circle cx="0" cy="-1" r="5.5"/>
+      <circle cx="0" cy="-1" r="7.5"/>
+    </g>
+    <line x1="-12" y1="-9" x2="14" y2="11" stroke="#dc2626" stroke-width="1.8"/>
+    <line x1="-12" y1="-9" x2="14" y2="11" stroke="#fef3c7" stroke-width="0.5"/>
+    <g fill="#dc2626" stroke="#7f1d1d" stroke-width="0.4">
+      <polygon points="-9,-7 -7,-7 -8,-4"/>
+      <polygon points="6,4 8,4 7,7"/>
+    </g>
+    <rect x="11" y="-9" width="6" height="3" rx="0.5" fill="#16a34a" stroke="#0a0a0a" stroke-width="0.4"/>
+    <text x="14" y="-6.6" text-anchor="middle" font-family="monospace" font-size="2" fill="#0a0a0a" font-weight="bold">OK</text>
+  </g>
+  <g transform="translate(50 50)">
+    <rect x="-7" y="-3" width="14" height="6" rx="0.6" fill="#0d1117" stroke="#22c55e" stroke-width="0.6"/>
+    <text x="0" y="1.4" text-anchor="middle" font-family="monospace" font-size="3.4" fill="#22c55e" font-weight="bold">&gt;_</text>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="3.6" fill="#fde047" font-weight="bold">TestDisk</text>
+</svg>

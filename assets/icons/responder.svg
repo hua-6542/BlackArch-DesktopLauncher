@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="rsEar" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g font-family="monospace" font-size="2.4" fill="#22c55e" opacity="0.45">
+    <text x="2" y="6">[*] Listening LLMNR</text>
+    <text x="2" y="10">[*] Listening NBT-NS</text>
+    <text x="2" y="62">[+] NTLMv2 captured!</text>
+    <text x="2" y="58">user::DOMAIN:hash..</text>
+  </g>
+  <g transform="translate(32 32)">
+    <ellipse cx="0" cy="0" rx="14" ry="16" fill="url(#rsEar)" stroke="#3a1d04" stroke-width="1.4"/>
+    <path d="M-4 -10 Q4 -10 6 -2 Q8 4 4 8 Q0 10 -2 6 Q-4 0 -2 -4" fill="none" stroke="#3a1d04" stroke-width="1.4"/>
+    <ellipse cx="-1" cy="2" rx="2.6" ry="3.4" fill="#0a0a0a"/>
+  </g>
+  <g stroke="#22d3ee" fill="none" stroke-linecap="round">
+    <path d="M50 16 Q56 22 50 28" stroke-width="1.4" opacity="0.85"/>
+    <path d="M54 12 Q62 22 54 32" stroke-width="1.4" opacity="0.7"/>
+    <path d="M58 8 Q68 22 58 36" stroke-width="1.4" opacity="0.5"/>
+  </g>
+  <g stroke="#22d3ee" fill="none" stroke-linecap="round">
+    <path d="M14 16 Q8 22 14 28" stroke-width="1.4" opacity="0.85"/>
+    <path d="M10 12 Q2 22 10 32" stroke-width="1.4" opacity="0.7"/>
+  </g>
+  <text x="32" y="56" text-anchor="middle" font-family="monospace" font-size="3.6" fill="#dc2626" font-weight="bold">poison.relay</text>
+</svg>

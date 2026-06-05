@@ -1,0 +1,29 @@
+# Build output
+build/
+build-*/
+
+# IDE
+.idea/
+.vscode/
+*.user
+.cache/
+
+# Qt / QML
+*.qmlc
+*.jsc
+CMakeLists.txt.user*
+*.autosave
+compile_commands.json
+
+# OS
+.DS_Store
+Thumbs.db
+*~
+
+# Packaging artifacts (makepkg output)
+/pkg/
+/pkgsrc/
+*.pkg.tar.*
+*.tar.gz
+*.tar.xz
+*.tar.zst

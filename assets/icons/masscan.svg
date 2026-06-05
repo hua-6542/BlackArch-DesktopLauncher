@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="rocket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8e8e8"/>
+      <stop offset="1" stop-color="#5a5a5a"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="0.6" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M16 4 L20 18 L20 36 L12 36 L12 18 Z" fill="url(#rocket)" stroke="#3a3a3a" stroke-width="1"/>
+    <circle cx="16" cy="14" r="2" fill="#dc2626"/>
+    <circle cx="16" cy="14" r="0.8" fill="#fff"/>
+    <path d="M12 36 L8 44 L12 36" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M20 36 L24 44 L20 36" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M14 36 L14 50" stroke="url(#flame)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M18 36 L18 48" stroke="url(#flame)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g>
+    <path d="M32 8 L36 22 L36 38 L28 38 L28 22 Z" fill="url(#rocket)" stroke="#3a3a3a" stroke-width="1"/>
+    <circle cx="32" cy="18" r="2" fill="#dc2626"/>
+    <circle cx="32" cy="18" r="0.8" fill="#fff"/>
+    <path d="M28 38 L24 46 L28 38" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M36 38 L40 46 L36 38" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M30 38 L30 52" stroke="url(#flame)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M34 38 L34 50" stroke="url(#flame)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g>
+    <path d="M48 12 L52 26 L52 42 L44 42 L44 26 Z" fill="url(#rocket)" stroke="#3a3a3a" stroke-width="1"/>
+    <circle cx="48" cy="22" r="2" fill="#dc2626"/>
+    <circle cx="48" cy="22" r="0.8" fill="#fff"/>
+    <path d="M44 42 L40 50 L44 42" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M52 42 L56 50 L52 42" fill="url(#flame)" stroke="#7c2d12" stroke-width="0.5"/>
+    <path d="M46 42 L46 56" stroke="url(#flame)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M50 42 L50 54" stroke="url(#flame)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <line x1="13" y1="10" x2="11" y2="6" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+  <line x1="29" y1="14" x2="27" y2="10" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+  <line x1="45" y1="18" x2="43" y2="14" stroke="#dc2626" stroke-width="1" opacity="0.6"/>
+</svg>

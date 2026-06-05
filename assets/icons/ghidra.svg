@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ghDragon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#3a0a0a"/>
+    </linearGradient>
+    <linearGradient id="ghWing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#1f0a0a"/>
+    </linearGradient>
+    <radialGradient id="ghFire" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff8e1"/>
+      <stop offset="0.4" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#dc2626"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g stroke="#7f1d1d" stroke-width="0.5" opacity="0.45" fill="none">
+    <line x1="0" y1="14" x2="64" y2="14"/>
+    <line x1="0" y1="22" x2="64" y2="22"/>
+    <line x1="0" y1="30" x2="64" y2="30"/>
+    <line x1="0" y1="38" x2="64" y2="38"/>
+    <line x1="0" y1="46" x2="64" y2="46"/>
+    <line x1="0" y1="54" x2="64" y2="54"/>
+  </g>
+  <g font-family="monospace" font-size="2.4" fill="#dc2626" opacity="0.55">
+    <text x="2" y="6">JMP rax</text>
+    <text x="42" y="6">CALL 0x401</text>
+    <text x="2" y="62">SLED &amp;hellip;</text>
+    <text x="40" y="62">RET</text>
+  </g>
+  <path d="M44 16 Q58 10 60 22 Q56 28 50 30 Q44 36 38 32 Z"
+        fill="url(#ghWing)" stroke="#1f0a0a" stroke-width="1"/>
+  <path d="M48 22 L52 26 M50 18 L54 22 M52 24 L56 28"
+        stroke="#fbbf24" stroke-width="0.7" opacity="0.7"/>
+  <path d="M14 44 Q10 38 14 32 Q18 26 26 26 Q34 22 40 28 Q46 32 44 40 Q42 48 32 50 Q22 50 14 44 Z"
+        fill="url(#ghDragon)" stroke="#1f0a0a" stroke-width="1.4"/>
+  <path d="M40 28 Q48 22 52 28 Q48 32 44 32 Z" fill="url(#ghDragon)" stroke="#1f0a0a" stroke-width="1"/>
+  <ellipse cx="46" cy="29" rx="1.6" ry="2" fill="#fde047"/>
+  <circle cx="46" cy="29" r="0.8" fill="#0a0a0a"/>
+  <path d="M50 32 L56 30 L54 34 Z" fill="#fff" stroke="#1f0a0a" stroke-width="0.6"/>
+  <path d="M14 44 Q6 48 4 56 Q12 52 16 50" fill="url(#ghDragon)" stroke="#1f0a0a" stroke-width="1"/>
+  <path d="M30 26 L32 22 L34 26 M36 25 L38 21 L40 25"
+        stroke="#1f0a0a" stroke-width="1" fill="none" stroke-linejoin="round"/>
+  <g transform="translate(54 32)">
+    <path d="M0 0 Q4 -2 8 -1 Q12 1 14 4 Q10 4 6 3 Q2 2 0 0 Z" fill="url(#ghFire)" stroke="#dc2626" stroke-width="0.4"/>
+  </g>
+</svg>

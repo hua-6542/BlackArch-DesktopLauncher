@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="dna1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5cd8ff"/>
+      <stop offset="1" stop-color="#1a6f9c"/>
+    </linearGradient>
+    <linearGradient id="dna2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#9d174d"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 8 Q42 16 22 24 Q42 32 22 40 Q42 48 22 56" fill="none" stroke="url(#dna1)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M42 8 Q22 16 42 24 Q22 32 42 40 Q22 48 42 56" fill="none" stroke="url(#dna2)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="22" y1="12" x2="42" y2="12" stroke="#fbbf24" stroke-width="2"/>
+  <line x1="22" y1="20" x2="42" y2="20" stroke="#22d3ee" stroke-width="2"/>
+  <line x1="22" y1="28" x2="42" y2="28" stroke="#fbbf24" stroke-width="2"/>
+  <line x1="22" y1="36" x2="42" y2="36" stroke="#22d3ee" stroke-width="2"/>
+  <line x1="22" y1="44" x2="42" y2="44" stroke="#fbbf24" stroke-width="2"/>
+  <line x1="22" y1="52" x2="42" y2="52" stroke="#22d3ee" stroke-width="2"/>
+  <circle cx="22" cy="12" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="20" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+  <circle cx="22" cy="28" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="36" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+  <circle cx="22" cy="44" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="52" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+  <circle cx="22" cy="20" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="12" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+  <circle cx="22" cy="36" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="28" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+  <circle cx="22" cy="52" r="2.5" fill="#a8eaff" stroke="#1a6f9c" stroke-width="0.8"/>
+  <circle cx="42" cy="44" r="2.5" fill="#fbb6ce" stroke="#9d174d" stroke-width="0.8"/>
+</svg>

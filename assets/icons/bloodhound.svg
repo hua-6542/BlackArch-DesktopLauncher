@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bhEye" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="0.6" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#3a0a0a"/>
+    </radialGradient>
+    <linearGradient id="bhSkull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f2937"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="bhEdge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dc2626"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" fill="#0a0a0a"/>
+  <g font-family="monospace" font-size="2.4" fill="#22c55e" opacity="0.5">
+    <text x="2" y="6">DOMAIN: CORP</text>
+    <text x="2" y="10">DCSync OK</text>
+    <text x="2" y="14">krbtgt → DA</text>
+    <text x="2" y="58">path: 4 hops</text>
+    <text x="2" y="62">[+] Tier-0 owned</text>
+  </g>
+  <g stroke="url(#bhEdge)" stroke-width="0.7" fill="none" opacity="0.85">
+    <line x1="10" y1="22" x2="32" y2="32"/>
+    <line x1="54" y1="20" x2="32" y2="32"/>
+    <line x1="14" y1="46" x2="32" y2="32"/>
+    <line x1="50" y1="48" x2="32" y2="32"/>
+    <line x1="32" y1="14" x2="32" y2="32"/>
+  </g>
+  <g fill="#1d2230" stroke="#22c55e" stroke-width="0.7">
+    <circle cx="10" cy="22" r="2.4"/>
+    <circle cx="54" cy="20" r="2.4"/>
+    <circle cx="14" cy="46" r="2.4"/>
+    <circle cx="50" cy="48" r="2.4"/>
+    <circle cx="32" cy="14" r="2.4"/>
+  </g>
+  <g font-family="monospace" font-size="2.2" fill="#7ee787" font-weight="bold">
+    <text x="6" y="20">USER</text>
+    <text x="49" y="18">HOST</text>
+    <text x="9" y="52">GRP</text>
+    <text x="46" y="54">GPO</text>
+    <text x="28" y="11">DC</text>
+  </g>
+  <g transform="translate(32 36)">
+    <path d="M -8 -3 Q -10 -8 -6 -10 Q -8 -4 -4 -2 Z" fill="url(#bhSkull)" stroke="#0a0a0a" stroke-width="0.4"/>
+    <path d="M  8 -3 Q 10 -8  6 -10 Q  8 -4  4 -2 Z" fill="url(#bhSkull)" stroke="#0a0a0a" stroke-width="0.4"/>
+    <ellipse cx="0" cy="0" rx="9" ry="8" fill="url(#bhSkull)" stroke="#dc2626" stroke-width="0.7"/>
+    <ellipse cx="0" cy="3" rx="6" ry="5" fill="url(#bhSkull)"/>
+    <ellipse cx="-3" cy="-1" rx="2" ry="2.4" fill="url(#bhEye)" stroke="#0a0a0a" stroke-width="0.4"/>
+    <ellipse cx="3" cy="-1" rx="2" ry="2.4" fill="url(#bhEye)" stroke="#0a0a0a" stroke-width="0.4"/>
+    <circle cx="-3" cy="-0.5" r="0.5" fill="#0a0a0a"/>
+    <circle cx="3" cy="-0.5" r="0.5" fill="#0a0a0a"/>
+    <path d="M -1.6 4 L 0 6 L 1.6 4 Z" fill="#0a0a0a"/>
+    <g stroke="#fff" stroke-width="0.3" fill="none">
+      <path d="M -2 7 L -1.5 8 L -1 7"/>
+      <path d="M  2 7 L  1.5 8 L  1 7"/>
+    </g>
+    <g fill="#fff">
+      <polygon points="-1.8,7 -1.4,8.4 -1,7"/>
+      <polygon points="1.8,7 1.4,8.4 1,7"/>
+    </g>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="3.6" fill="#dc2626" font-weight="bold">BloodHound</text>
+</svg>

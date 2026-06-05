@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="man" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#3b1474"/>
+    </linearGradient>
+    <linearGradient id="pkt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+  </defs>
+  <circle cx="12" cy="30" r="6" fill="#15803d" stroke="#0a3d23" stroke-width="1.2"/>
+  <text x="12" y="32" text-anchor="middle" font-family="monospace" font-size="5" fill="#fff" font-weight="bold">A</text>
+  <circle cx="52" cy="30" r="6" fill="#0e7490" stroke="#0a2540" stroke-width="1.2"/>
+  <text x="52" y="32" text-anchor="middle" font-family="monospace" font-size="5" fill="#fff" font-weight="bold">B</text>
+  <line x1="18" y1="30" x2="46" y2="30" stroke="#52525b" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <g transform="translate(32 36)">
+    <ellipse cx="0" cy="-10" rx="4" ry="4.5" fill="url(#man)" stroke="#1f0a4a" stroke-width="1"/>
+    <circle cx="-1.4" cy="-11" r="0.6" fill="#fbbf24"/>
+    <circle cx="1.4" cy="-11" r="0.6" fill="#fbbf24"/>
+    <path d="M-6 -2 Q-4 -8 0 -7 Q4 -8 6 -2 L6 6 L-6 6 Z" fill="url(#man)" stroke="#1f0a4a" stroke-width="1"/>
+    <path d="M-6 -2 L-10 4 M6 -2 L10 4" stroke="url(#man)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-6 6 L-4 14 M6 6 L4 14" stroke="url(#man)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-2 -12 L-2 -16 L2 -14 Z M2 -12 L2 -16 L-2 -14 Z" fill="#dc2626"/>
+  </g>
+  <g transform="translate(22 22)">
+    <rect x="-3" y="-2" width="6" height="4" rx="0.6" fill="url(#pkt)" stroke="#0a2540" stroke-width="0.6"/>
+    <text x="0" y="1" text-anchor="middle" font-family="monospace" font-size="2.4" fill="#fff" font-weight="bold">v6</text>
+  </g>
+  <g transform="translate(42 22)">
+    <rect x="-3" y="-2" width="6" height="4" rx="0.6" fill="url(#pkt)" stroke="#0a2540" stroke-width="0.6"/>
+    <text x="0" y="1" text-anchor="middle" font-family="monospace" font-size="2.4" fill="#fff" font-weight="bold">v6</text>
+  </g>
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="5" fill="#22d3ee" font-weight="bold">::1 MITM</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="patbody" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffd5e8"/>
+      <stop offset="0.6" stop-color="#ff85c0"/>
+      <stop offset="1" stop-color="#c2185b"/>
+    </radialGradient>
+    <linearGradient id="pant" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#86efac"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+  <!-- 五角海星身体 -->
+  <path d="M32 4 Q34 22 50 18 Q54 18 50 28 Q42 36 48 50 Q48 54 38 48 Q32 44 26 48 Q16 54 16 50 Q22 36 14 28 Q10 18 14 18 Q30 22 32 4 Z"
+        fill="url(#patbody)" stroke="#9d0e54" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- 高光 -->
+  <path d="M28 12 Q36 10 38 16 Q34 18 30 16 Z" fill="#fff" fill-opacity="0.55"/>
+  <!-- 眉毛 -->
+  <path d="M22 22 Q26 20 30 22" fill="none" stroke="#5a0e2e" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M34 22 Q38 20 42 22" fill="none" stroke="#5a0e2e" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- 眼白 -->
+  <ellipse cx="26" cy="26" rx="3" ry="3.5" fill="#fff" stroke="#3a3a3a" stroke-width="0.8"/>
+  <ellipse cx="38" cy="26" rx="3" ry="3.5" fill="#fff" stroke="#3a3a3a" stroke-width="0.8"/>
+  <!-- 黑眼珠 -->
+  <circle cx="26" cy="27" r="1.3" fill="#0a0a0a"/>
+  <circle cx="38" cy="27" r="1.3" fill="#0a0a0a"/>
+  <circle cx="26.5" cy="26.5" r="0.5" fill="#fff"/>
+  <circle cx="38.5" cy="26.5" r="0.5" fill="#fff"/>
+  <!-- 大笑嘴 -->
+  <path d="M24 32 Q32 40 40 32 Q36 36 32 36 Q28 36 24 32 Z" fill="#7a1f3a" stroke="#3a0a0a" stroke-width="1"/>
+  <!-- 牙齿 -->
+  <rect x="29" y="32" width="2" height="2.5" fill="#fff"/>
+  <rect x="33" y="32" width="2" height="2.5" fill="#fff"/>
+  <!-- 绿色花裤衩 -->
+  <path d="M22 40 Q22 38 26 38 L38 38 Q42 38 42 40 L40 48 Q40 50 36 50 L28 50 Q24 50 24 48 Z"
+        fill="url(#pant)" stroke="#0f5d28" stroke-width="1"/>
+  <!-- 裤衩高光 -->
+  <path d="M24 40 L24 46" stroke="#a4f08a" stroke-width="1" opacity="0.6"/>
+  <!-- 紫色小花 -->
+  <g transform="translate(28 44)">
+    <circle r="2" fill="#a78bfa"/>
+    <circle r="0.8" fill="#fbbf24"/>
+  </g>
+  <g transform="translate(36 44)">
+    <circle r="2" fill="#a78bfa"/>
+    <circle r="0.8" fill="#fbbf24"/>
+  </g>
+  <!-- 红色 XSS 标记（hacker 风） -->
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="6" font-weight="bold" fill="#dc2626">&lt;XSS&gt;</text>
+</svg>
