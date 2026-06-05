@@ -118,7 +118,7 @@ private:
     int m_rollDurationMs = 1500;
     QString m_transitionStyle = "slide";
     bool m_rollEnabled = true;
-    bool m_useCompose = true;
+    bool m_useCompose = false;
     QString m_terminalCmd = "konsole";
     QString m_containerCmd = "distrobox enter blackarch --";
     QString m_pathBackgrounds;

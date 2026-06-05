@@ -105,7 +105,7 @@ blackarch-tree
     "interval": 5,
     "transition_duration": 1.5,
     "transition_style": "slide",
-    "use_compose": true
+    "use_compose": false
   },
   "terminal": "konsole",
   "container": "distrobox enter blackarch --"
@@ -117,7 +117,7 @@ blackarch-tree
 | `interval` | 背景自动切换间隔（秒） |
 | `transition_duration` | 过渡动画时长（秒） |
 | `transition_style` | `fade` / `slide` / `zoom` |
-| `use_compose` | true 优先用预合成毛玻璃图，false 用原图 |
+| `use_compose` | true 用预合成毛玻璃图，false 用原图（更透亮） |
 
 ## 项目结构
 

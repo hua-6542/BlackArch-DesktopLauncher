@@ -161,7 +161,7 @@ GlassPane {
                             visible: !d.isLeaf
                             Layout.preferredHeight: 18
                             Layout.preferredWidth: countTxt.implicitWidth + 12
-                            radius: 9; color: Qt.rgba(1, 1, 1, 0.07)
+                            radius: 9; color: Qt.rgba(1, 1, 1, 0.10)
                             Text {
                                 id: countTxt; anchors.centerIn: parent
                                 text: d.childCount; color: "#a6b0c2"; font.pixelSize: 11

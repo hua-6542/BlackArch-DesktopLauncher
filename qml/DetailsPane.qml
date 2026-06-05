@@ -35,8 +35,8 @@ GlassPane {
                 Layout.preferredHeight: 96
                 Rectangle {
                     anchors.fill: parent; radius: 14
-                    color: Qt.rgba(1, 1, 1, 0.04)
-                    border.color: Qt.rgba(1, 1, 1, 0.08); border.width: 1
+                    color: "transparent"
+                    border.color: Qt.rgba(1, 1, 1, 0.12); border.width: 1
                 }
                 Image {
                     anchors.fill: parent; anchors.margins: 12
@@ -143,8 +143,8 @@ GlassPane {
                     Layout.fillWidth: true
                     Layout.preferredHeight: usageContent.implicitHeight + 20
                     visible: root.hasData()
-                    radius: 6; color: Qt.rgba(0, 0, 0, 0.36)
-                    border.color: Qt.rgba(1, 1, 1, 0.08); border.width: 1
+                    radius: 6; color: Qt.rgba(0, 0, 0, 0.15)
+                    border.color: Qt.rgba(1, 1, 1, 0.12); border.width: 1
                     Text {
                         id: usageContent
                         anchors.fill: parent; anchors.margins: 12
@@ -165,7 +165,7 @@ GlassPane {
                     Layout.fillWidth: true
                     Layout.preferredHeight: execBlock.implicitHeight + 20
                     visible: root.toolExec !== ""
-                    radius: 6; color: Qt.rgba(0, 0, 0, 0.28)
+                    radius: 6; color: Qt.rgba(0, 0, 0, 0.12)
                     border.color: Qt.rgba(1, 1, 1, 0.06); border.width: 1
                     Text {
                         id: execBlock
@@ -186,8 +186,8 @@ GlassPane {
             }
 
             background: Rectangle {
-                radius: 10; color: Qt.rgba(1, 1, 1, 0.04)
-                border.color: Qt.rgba(1, 1, 1, 0.08); border.width: 1
+                radius: 10; color: "transparent"
+                border.color: Qt.rgba(1, 1, 1, 0.12); border.width: 1
             }
         }
 

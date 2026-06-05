@@ -33,7 +33,7 @@ QJsonObject defaultConfig() {
     roll["interval"] = 5;
     roll["transition_duration"] = 1.5;
     roll["transition_style"] = "slide";
-    roll["use_compose"] = true;
+    roll["use_compose"] = false;
 
     QJsonObject root;
     root["paths"] = paths;

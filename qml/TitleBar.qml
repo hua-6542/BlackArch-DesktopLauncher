@@ -80,8 +80,8 @@ Item {
             Layout.preferredWidth: 280
             Layout.preferredHeight: 32
             radius: 8
-            color: searchField.activeFocus ? Qt.rgba(0.357, 0.553, 0.937, 0.10) : Qt.rgba(0, 0, 0, 0.30)
-            border.color: searchField.activeFocus ? "#5b8def" : Qt.rgba(1, 1, 1, 0.10)
+            color: searchField.activeFocus ? Qt.rgba(0.357, 0.553, 0.937, 0.08) : Qt.rgba(0, 0, 0, 0.12)
+            border.color: searchField.activeFocus ? "#5b8def" : Qt.rgba(1, 1, 1, 0.14)
             border.width: 1
             Behavior on color { ColorAnimation { duration: 120 } }
             Behavior on border.color { ColorAnimation { duration: 120 } }
