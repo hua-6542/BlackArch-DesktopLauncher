@@ -162,6 +162,33 @@ void Backend::scanBackgrounds() {
     if (found.isEmpty())
         pickFrom(homePath() + "/.local/share/blackarch-launcher/fallback", {"*.png", "*.jpg", "*.jpeg"});
 
+    // Dedup: when both foo-full.png and foo.png are present, keep only the
+    // -full variant (which is the one sized for the window).
+    {
+        QSet<QString> fullStems;
+        for (const auto& u : found) {
+            QString fn = QUrl(u).fileName();
+            if (fn.endsWith("-full.png"))
+                fullStems.insert(fn.chopped(9)); // remove "-full.png"
+        }
+        if (!fullStems.isEmpty()) {
+            QStringList deduped;
+            for (const auto& u : found) {
+                QString fn = QUrl(u).fileName();
+                QString stem = fn;
+                if (stem.endsWith(".png")) stem.chop(4);
+                else if (stem.endsWith(".jpg") || stem.endsWith(".jpeg")) {
+                    int dot = stem.lastIndexOf('.');
+                    if (dot >= 0) stem = stem.left(dot);
+                }
+                if (!stem.endsWith("-full") && fullStems.contains(stem))
+                    continue; // a -full variant exists for this file, skip
+                deduped.append(u);
+            }
+            found = deduped;
+        }
+    }
+
     bool wasFallback = m_fallbackActive;
     m_fallbackActive = found.isEmpty();
 
