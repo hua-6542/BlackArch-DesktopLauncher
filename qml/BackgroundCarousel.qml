@@ -105,7 +105,7 @@ Item {
     Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 12
+        anchors.rightMargin: 160
         anchors.bottomMargin: 12
         width: badgeText.implicitWidth + 18
         height: badgeText.implicitHeight + 10
