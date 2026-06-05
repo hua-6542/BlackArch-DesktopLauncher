@@ -1,18 +1,9 @@
 // SPDX-License-Identifier: MIT
 //
-// Multi-background carousel with three transition styles: fade / slide / zoom.
+// Multi-background carousel — fade / slide / zoom transitions.
 //
-// The carousel fades its own opacity in when sources become available and out
-// when sources go empty, so the gradient base layer always shows through during
-// loading gaps — no hard cut.
-//
-// Implementation notes:
-//  * Two stacked Image layers (current + next).  When time to switch, the
-//    *next* layer is loaded with the upcoming pixmap, then animated in by
-//    fading its opacity (and optionally translating or scaling).  After the
-//    transition finishes, we promote the next layer into the current slot.
-//  * A vignette overlay keeps foreground text readable regardless of wallpaper.
-//  * Broken images are skipped automatically.
+// Two-layer design: the next image is preloaded into a hidden layer (layerB)
+// before the transition starts, so there's no flash of missing content.
 
 import QtQuick
 
@@ -25,26 +16,19 @@ Item {
     property int durationMs: 2000
     property string style: "fade"
     property bool rollEnabled: true
-
-    // Whether the carousel should show its content.  The caller toggles this
-    // when sources become populated / empty, triggering a smooth crossfade
-    // between the gradient base layer and the loaded wallpapers.
     property bool active: true
     property real carouselOpacity: active ? 1.0 : 0.0
 
     property int currentIndex: 0
     property int _nextIndex: 0
     property bool _animating: false
+    property bool _pendingAnimation: false
     property var _brokenImages: ({})
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Base: dark colour visible through any transparent gap.
-    // ═══════════════════════════════════════════════════════════════════════════
+    // Dark base behind both layers.
     Rectangle { anchors.fill: parent; color: "#05070b" }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Layer A — current image
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Layer A (current) ─────────────────────────────────────────────
     Image {
         id: layerA
         anchors.fill: parent
@@ -53,7 +37,7 @@ Item {
         cache: true
         asynchronous: true
         smooth: true
-        mipmap: false
+        mipmap: true
         opacity: 1.0
 
         onStatusChanged: {
@@ -68,9 +52,7 @@ Item {
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Layer B — upcoming image, animated in during transitions
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Layer B (next) ────────────────────────────────────────────────
     Image {
         id: layerB
         anchors.fill: parent
@@ -78,30 +60,33 @@ Item {
         cache: true
         asynchronous: true
         smooth: true
+        mipmap: true
         opacity: 0.0
         transform: [
             Translate { id: layerBTranslate; x: 0; y: 0 },
             Scale    { id: layerBScale; origin.x: layerB.width/2; origin.y: layerB.height/2; xScale: 1.0; yScale: 1.0 }
         ]
+
         onStatusChanged: {
             if (status === Image.Error) {
                 _brokenImages[source.toString()] = true
+                root._pendingAnimation = false
+                // Skip to next candidate if this one is broken.
+                root._advanceToNextCandidate()
+            } else if (status === Image.Ready && root._pendingAnimation) {
+                root._pendingAnimation = false
+                root._startTransitionAnimations()
             }
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Vignette
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Vignette ──────────────────────────────────────────────────────
     Rectangle {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.10)
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Whole-carousel opacity — animated for smooth entrance / exit
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Entrance / exit opacity ───────────────────────────────────────
     property bool _entranceDone: false
 
     NumberAnimation {
@@ -111,7 +96,6 @@ Item {
         duration: 1200
         easing.type: Easing.InOutCubic
     }
-
     opacity: carouselOpacity
 
     function _doEntrance() {
@@ -121,7 +105,6 @@ Item {
         carouselOpacityAnim.to = 1.0
         carouselOpacityAnim.start()
     }
-
     function _doExit() {
         root._entranceDone = false
         carouselOpacityAnim.from = root.carouselOpacity
@@ -130,34 +113,25 @@ Item {
     }
 
     onActiveChanged: {
-        if (active && sources.length > 0) {
-            _doEntrance()
-        } else if (!active) {
-            _doExit()
-        }
+        if (active && sources.length > 0) _doEntrance()
+        else if (!active) _doExit()
     }
-
     onSourcesChanged: {
         _brokenImages = ({})
         _entranceDone = false
+        _pendingAnimation = false
         if (sources.length > 0) {
             currentIndex = 0
             layerA.source = sources[0]
-            // If we were faded out, start fade-in.
-            if (root.carouselOpacity < 0.05) {
-                _doEntrance()
-            }
+            if (root.carouselOpacity < 0.05) _doEntrance()
         } else {
-            // No sources — fade to transparent so the gradient shows through.
             root.carouselOpacity = 0.0
             layerA.source = ""
             layerB.source = ""
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Transition animations
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Transition animations ─────────────────────────────────────────
     NumberAnimation {
         id: animFadeIn
         target: layerB; property: "opacity"; from: 0.0; to: 1.0
@@ -168,28 +142,40 @@ Item {
     NumberAnimation {
         id: animSlide
         target: layerBTranslate; property: "x"
-        from: root.width; to: 0
         duration: root.durationMs
         easing.type: Easing.OutCubic
     }
     NumberAnimation {
         id: animZoomX
         target: layerBScale; property: "xScale"
-        from: 1.08; to: 1.0
         duration: root.durationMs
         easing.type: Easing.OutCubic
     }
     NumberAnimation {
         id: animZoomY
         target: layerBScale; property: "yScale"
-        from: 1.08; to: 1.0
         duration: root.durationMs
         easing.type: Easing.OutCubic
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Ticker
-    // ═══════════════════════════════════════════════════════════════════════════
+    function _startTransitionAnimations() {
+        animFadeIn.from = 0.0; animFadeIn.to = 1.0
+        animFadeIn.duration = root.durationMs
+        animFadeIn.start()
+
+        if (root.style === "slide") {
+            animSlide.from = root._slideDirection > 0 ? root.width : -root.width
+            animSlide.to = 0
+            animSlide.duration = root.durationMs
+            animSlide.start()
+        } else if (root.style === "zoom") {
+            animZoomX.from = 1.08; animZoomX.to = 1.0; animZoomX.duration = root.durationMs
+            animZoomY.from = 1.08; animZoomY.to = 1.0; animZoomY.duration = root.durationMs
+            animZoomX.start(); animZoomY.start()
+        }
+    }
+
+    // ── Timer ─────────────────────────────────────────────────────────
     Timer {
         id: ticker
         interval: root.intervalMs
@@ -198,23 +184,21 @@ Item {
         onTriggered: root.next()
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Public API
-    // ═══════════════════════════════════════════════════════════════════════════
+    // ── Public API ────────────────────────────────────────────────────
     function next()  { _step(+1) }
     function prev()  { _step(-1) }
 
+    property int _slideDirection: 1
+
     function _step(direction) {
         if (root.sources.length === 0) return
-        if (root._animating) return
+        if (root._animating || root._pendingAnimation) return
 
         if (root.sources.length === 1) {
             layerA.source = root.sources[0]
             root.currentIndex = 0
             return
         }
-
-        root._animating = true
 
         var start = root.currentIndex
         var attempts = 0
@@ -225,31 +209,49 @@ Item {
             attempts++
         } while (_brokenImages[root.sources[candidate]] === true)
 
-        if (candidate === root.currentIndex) {
+        if (candidate === root.currentIndex) return
+
+        root._animating = true
+        root._nextIndex = candidate
+        root._slideDirection = direction
+
+        // Reset layerB to invisible state.
+        layerB.opacity = 0
+        layerBTranslate.x = 0; layerBTranslate.y = 0
+        layerBScale.xScale = 1.0; layerBScale.yScale = 1.0
+
+        // Set the source — the transition will be triggered by
+        // layerB.onStatusChanged when the pixmap is ready.
+        root._pendingAnimation = true
+        layerB.source = root.sources[root._nextIndex]
+    }
+
+    function _advanceToNextCandidate() {
+        // Called when the image at _nextIndex fails to load.
+        // Try the next index in the current direction.
+        if (root.sources.length <= 1) {
             root._animating = false
+            root._pendingAnimation = false
+            return
+        }
+        var candidate = root._nextIndex
+        var start = candidate
+        var attempts = 0
+        do {
+            candidate = (candidate + root._slideDirection + root.sources.length) % root.sources.length
+            if (candidate === start || attempts >= root.sources.length) break
+            attempts++
+        } while (_brokenImages[root.sources[candidate]] === true)
+
+        if (candidate === root._nextIndex || attempts >= root.sources.length) {
+            // No good candidate — abort.
+            root._animating = false
+            root._pendingAnimation = false
             return
         }
         root._nextIndex = candidate
-
-        layerBTranslate.x = 0; layerBTranslate.y = 0
-        layerBScale.xScale = 1.0; layerBScale.yScale = 1.0
-        layerB.opacity = 0
+        root._pendingAnimation = true
         layerB.source = root.sources[root._nextIndex]
-
-        animFadeIn.from = 0.0; animFadeIn.to = 1.0
-        animFadeIn.duration = root.durationMs
-        animFadeIn.start()
-
-        if (root.style === "slide") {
-            animSlide.from = direction > 0 ? root.width : -root.width
-            animSlide.to = 0
-            animSlide.duration = root.durationMs
-            animSlide.start()
-        } else if (root.style === "zoom") {
-            animZoomX.from = 1.08; animZoomX.to = 1.0; animZoomX.duration = root.durationMs
-            animZoomY.from = 1.08; animZoomY.to = 1.0; animZoomY.duration = root.durationMs
-            animZoomX.start(); animZoomY.start()
-        }
     }
 
     function _skipCurrentAndAdvance() {
@@ -274,5 +276,6 @@ Item {
         layerBTranslate.x = 0; layerBTranslate.y = 0
         layerBScale.xScale = 1.0; layerBScale.yScale = 1.0
         root._animating = false
+        root._pendingAnimation = false
     }
 }
