@@ -11,7 +11,7 @@ GlassPane {
 
     function selectFirstLeaf() {
         for (let r = 0; r < tree.rows; ++r) {
-            const idx = tree.modelIndex(r, 0)
+            const idx = tree.index(r, 0)
             if (Backend.toolTree.isCategory(idx)) {
                 if (!tree.isExpanded(r)) tree.expand(r)
                 return
@@ -96,7 +96,7 @@ GlassPane {
                     anchors.fill: parent
                     anchors.leftMargin: 4; anchors.rightMargin: 4
                     radius: 6
-                    color: d.treeView.selectionModel.currentIndex === d.treeView.modelIndex(d.row, 0)
+                    color: d.treeView.selectionModel.currentIndex === d.treeView.index(d.row, 0)
                            ? Qt.rgba(0.357, 0.553, 0.937, 0.32)
                            : "transparent"
                     Behavior on color { ColorAnimation { duration: 110 } }
@@ -184,7 +184,7 @@ GlassPane {
 
                     TapHandler {
                         onTapped: function(ev, btn) {
-                            const idx = d.treeView.modelIndex(d.row, 0)
+                            const idx = d.treeView.index(d.row, 0)
                             d.treeView.selectionModel.setCurrentIndex(idx, 0x0030)
                             if (d.hasChildren) {
                                 if (d.expanded) d.treeView.collapse(d.row)
@@ -216,7 +216,7 @@ GlassPane {
             Qt.callLater(function() {
                 if (Backend.query.length > 0) {
                     for (let r = 0; r < tree.rows; ++r) {
-                        const idx = tree.modelIndex(r, 0)
+                        const idx = tree.index(r, 0)
                         if (Backend.toolTree.isCategory(idx) && !tree.isExpanded(r))
                             tree.expand(r)
                     }

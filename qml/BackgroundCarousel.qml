@@ -22,7 +22,6 @@ Item {
     property int currentIndex: 0
     property int _nextIndex: 0
     property bool _animating: false
-    property bool _pendingAnimation: false
     property var _brokenImages: ({})
 
     // Dark base behind both layers.
@@ -53,12 +52,16 @@ Item {
     }
 
     // ── Layer B (next) ────────────────────────────────────────────────
+    // asynchronous: false is deliberate — this layer is hidden (opacity 0)
+    // during loading, so synchronous load won't cause UI stutter.  It
+    // guarantees onStatusChanged fires for every source change, avoiding
+    // the race conditions that break the polling-timer approach.
     Image {
         id: layerB
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
         cache: true
-        asynchronous: true
+        asynchronous: false
         smooth: true
         mipmap: true
         opacity: 0.0
@@ -70,11 +73,8 @@ Item {
         onStatusChanged: {
             if (status === Image.Error) {
                 _brokenImages[source.toString()] = true
-                root._pendingAnimation = false
-                // Skip to next candidate if this one is broken.
                 root._advanceToNextCandidate()
-            } else if (status === Image.Ready && root._pendingAnimation) {
-                root._pendingAnimation = false
+            } else if (status === Image.Ready && root._animating) {
                 root._startTransitionAnimations()
             }
         }
@@ -119,7 +119,6 @@ Item {
     onSourcesChanged: {
         _brokenImages = ({})
         _entranceDone = false
-        _pendingAnimation = false
         if (sources.length > 0) {
             currentIndex = 0
             layerA.source = sources[0]
@@ -192,7 +191,7 @@ Item {
 
     function _step(direction) {
         if (root.sources.length === 0) return
-        if (root._animating || root._pendingAnimation) return
+        if (root._animating) return
 
         if (root.sources.length === 1) {
             layerA.source = root.sources[0]
@@ -215,23 +214,18 @@ Item {
         root._nextIndex = candidate
         root._slideDirection = direction
 
-        // Reset layerB to invisible state.
         layerB.opacity = 0
         layerBTranslate.x = 0; layerBTranslate.y = 0
         layerBScale.xScale = 1.0; layerBScale.yScale = 1.0
 
-        // Set the source — the transition will be triggered by
-        // layerB.onStatusChanged when the pixmap is ready.
-        root._pendingAnimation = true
+        // With asynchronous:false, setting source triggers synchronous
+        // load, and onStatusChanged fires reliably when done.
         layerB.source = root.sources[root._nextIndex]
     }
 
     function _advanceToNextCandidate() {
-        // Called when the image at _nextIndex fails to load.
-        // Try the next index in the current direction.
         if (root.sources.length <= 1) {
             root._animating = false
-            root._pendingAnimation = false
             return
         }
         var candidate = root._nextIndex
@@ -244,13 +238,10 @@ Item {
         } while (_brokenImages[root.sources[candidate]] === true)
 
         if (candidate === root._nextIndex || attempts >= root.sources.length) {
-            // No good candidate — abort.
             root._animating = false
-            root._pendingAnimation = false
             return
         }
         root._nextIndex = candidate
-        root._pendingAnimation = true
         layerB.source = root.sources[root._nextIndex]
     }
 
@@ -273,9 +264,9 @@ Item {
         root.currentIndex = root._nextIndex
         layerA.source = root.sources[root.currentIndex]
         layerB.opacity = 0
+        layerB.source = ""
         layerBTranslate.x = 0; layerBTranslate.y = 0
         layerBScale.xScale = 1.0; layerBScale.yScale = 1.0
         root._animating = false
-        root._pendingAnimation = false
     }
 }
