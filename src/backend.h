@@ -38,6 +38,10 @@ class Backend : public QObject {
     Q_PROPERTY(QString containerStatusColor READ containerStatusColor NOTIFY containerStatusChanged)
     Q_PROPERTY(int totalCount READ totalCount NOTIFY toolsChanged)
     Q_PROPERTY(QString query READ query WRITE setQuery NOTIFY queryChanged)
+    Q_PROPERTY(bool isInstalling READ isInstalling NOTIFY installStateChanged)
+    Q_PROPERTY(QString installStatus READ installStatus NOTIFY installStateChanged)
+    Q_PROPERTY(QString installLog READ installLog NOTIFY installLogChanged)
+    Q_PROPERTY(QVariantList searchResults READ searchResults NOTIFY searchResultsChanged)
 
 public:
     explicit Backend(QObject* parent = nullptr);
@@ -67,6 +71,10 @@ public:
     QString containerStatusColor() const { return m_containerStatusColor; }
     int totalCount() const { return m_tree ? m_tree->entries().size() : 0; }
     QString query() const { return m_query; }
+    bool isInstalling() const { return m_isInstalling; }
+    QString installStatus() const { return m_installStatus; }
+    QString installLog() const { return m_installLog; }
+    QVariantList searchResults() const { return m_searchResults; }
 
     void setRollIntervalMs(int v);
     void setRollDurationMs(int v);
@@ -88,6 +96,12 @@ public slots:
     // case-insensitively), or a generic fallback.  Static, no I/O.
     Q_INVOKABLE QString usageFor(const QString& name) const;
     Q_INVOKABLE void debugLog(const QString& msg);
+    Q_INVOKABLE void searchBlackArchTools(const QString& query);
+    Q_INVOKABLE void installTool(const QString& name, const QString& categoryTag,
+                                  bool isTerminal, const QString& iconPath);
+    Q_INVOKABLE void changeToolIcon(const QString& toolName, const QString& newIconPath);
+    Q_INVOKABLE QVariantList installLogFiles() const;
+    Q_INVOKABLE QString readInstallLogFile(const QString& path) const;
 
 signals:
     void toolsChanged();
@@ -97,6 +111,10 @@ signals:
     void queryChanged();
     void error(const QString& message);
     void toolSelected();
+    void installStateChanged();
+    void installLogChanged();
+    void searchResultsChanged();
+    void installFinished(bool success, const QString& message);
 
 private:
     void loadConfig();
@@ -142,4 +160,17 @@ private:
     QString m_selectedToolTag;
     QString m_selectedToolTagColor;
     QStringList m_history;
+
+    bool m_isInstalling = false;
+    QString m_installStatus;
+    QString m_installLog;
+    QVariantList m_searchResults;
+    QProcess* m_installProc = nullptr;
+    QString m_pendingToolName;
+    QString m_pendingCategoryTag;
+    bool m_pendingIsTerminal = true;
+    QString m_pendingIconPath;
+
+    void appendBaCliRun(const QString& name, const QString& description);
+    void finishInstall(bool success, const QString& message);
 };

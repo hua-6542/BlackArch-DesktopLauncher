@@ -12,6 +12,8 @@ Item {
     implicitHeight: 48
 
     property alias searchText: searchField.text
+    signal addToolClicked()
+    signal showLogsClicked()
 
     RowLayout {
         anchors.fill: parent
@@ -87,6 +89,55 @@ Item {
                         onClicked: searchField.clear()
                     }
                 }
+            }
+        }
+
+        // Add-tool button
+        Rectangle {
+            implicitWidth: 36
+            implicitHeight: 36
+            radius: 18
+            color: addBtnMouse.containsMouse ? Qt.rgba(0.357, 0.553, 0.937, 0.25) : Qt.rgba(0.357, 0.553, 0.937, 0.12)
+            border.color: addBtnMouse.containsMouse ? "#5b8def" : Qt.rgba(0.357, 0.553, 0.937, 0.3)
+            border.width: 1
+            Behavior on color { ColorAnimation { duration: 120 } }
+            Text {
+                anchors.centerIn: parent
+                text: "+"
+                color: addBtnMouse.containsMouse ? "#ffffff" : "#5b8def"
+                font.pixelSize: 20
+                font.bold: true
+            }
+            MouseArea {
+                id: addBtnMouse
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+                onClicked: root.addToolClicked()
+            }
+        }
+
+        // Install-log button
+        Rectangle {
+            implicitWidth: 36
+            implicitHeight: 36
+            radius: 18
+            color: logBtnMouse.containsMouse ? Qt.rgba(0.62, 0.75, 0.38, 0.25) : Qt.rgba(0.62, 0.75, 0.38, 0.10)
+            border.color: logBtnMouse.containsMouse ? "#6b9b3a" : Qt.rgba(0.62, 0.75, 0.38, 0.25)
+            border.width: 1
+            Behavior on color { ColorAnimation { duration: 120 } }
+            Text {
+                anchors.centerIn: parent
+                text: "📋"
+                color: logBtnMouse.containsMouse ? "#ffffff" : "#a6b0c2"
+                font.pixelSize: 14
+            }
+            MouseArea {
+                id: logBtnMouse
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+                onClicked: root.showLogsClicked()
             }
         }
     }

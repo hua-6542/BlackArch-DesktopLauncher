@@ -2,6 +2,7 @@
 import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 GlassPane {
     id: root
@@ -52,6 +53,29 @@ GlassPane {
                     text: root.toolName ? root.toolName.charAt(0).toUpperCase() : "?"
                     color: root.toolTagColor ? root.toolTagColor : "#888"
                     font.pixelSize: 48; font.bold: true
+                }
+                // Change-icon overlay button
+                Rectangle {
+                    anchors.right: parent.right; anchors.top: parent.top
+                    anchors.rightMargin: -4; anchors.topMargin: -4
+                    width: 24; height: 24; radius: 12
+                    color: iconEditMouse.containsMouse ? Qt.rgba(0.357, 0.553, 0.937, 0.9) : Qt.rgba(0, 0, 0, 0.7)
+                    border.color: Qt.rgba(1, 1, 1, 0.25); border.width: 1
+                    visible: root.hasData()
+                    Behavior on color { ColorAnimation { duration: 100 } }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "✎"
+                        color: "#ffffff"
+                        font.pixelSize: 11
+                    }
+                    MouseArea {
+                        id: iconEditMouse
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: iconFileDialog.open()
+                    }
                 }
             }
 
@@ -235,6 +259,17 @@ GlassPane {
                     leftPadding: 18; rightPadding: 18; topPadding: 10; bottomPadding: 10
                     font.pixelSize: 13; font.bold: true
                 }
+            }
+        }
+    }
+
+    FileDialog {
+        id: iconFileDialog
+        title: "选择工具图标"
+        nameFilters: ["图标文件 (*.png *.svg *.jpg *.jpeg *.ico)", "所有文件 (*)"]
+        onAccepted: {
+            if (selectedFile && root.toolName) {
+                Backend.changeToolIcon(root.toolName, String(selectedFile).replace("file://", ""))
             }
         }
     }

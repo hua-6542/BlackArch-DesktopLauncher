@@ -108,10 +108,35 @@ ApplicationWindow {
         target: Backend
         function onError(msg) {
             errorPopup.text = msg
+            errorPopup.color = Qt.rgba(0.85, 0.30, 0.30, 0.92)
             errorPopup.visible = true
             errorTimer.restart()
         }
+        function onInstallFinished(success, message) {
+            errorPopup.text = message
+            errorPopup.visible = true
+            errorPopup.color = success ? Qt.rgba(0.24, 0.65, 0.34, 0.92) : Qt.rgba(0.85, 0.30, 0.30, 0.92)
+            errorTimer.restart()
+        }
     }
+
+    // TitleBar buttons → show dialogs
+    Connections {
+        target: titleBar
+        function onAddToolClicked() { addToolDialog.shown = true }
+        function onShowLogsClicked() { installLogDialog.shown = true }
+    }
+
+    // Add tool dialog (modal overlay)
+    AddToolDialog {
+        id: addToolDialog
+    }
+
+    // Install log viewer (modal overlay)
+    InstallLogDialog {
+        id: installLogDialog
+    }
+
     Rectangle {
         id: errorPopup
         property string text: ""

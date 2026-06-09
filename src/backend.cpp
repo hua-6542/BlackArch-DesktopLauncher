@@ -13,6 +13,8 @@
 #include <QUrl>
 #include <QDebug>
 #include <QDesktopServices>
+#include <QRegularExpression>
+#include <QDateTime>
 #include <cstdio>
 
 namespace {
@@ -398,6 +400,398 @@ void Backend::debugLog(const QString& msg) {
         df.write(msg.toUtf8() + "\n");
         df.close();
     }
+}
+
+// ── search / install / icon ─────────────────────────────────────────────────
+
+void Backend::searchBlackArchTools(const QString& query) {
+    m_searchResults.clear();
+    emit searchResultsChanged();
+
+    if (query.trimmed().isEmpty()) return;
+
+    QProcess p;
+    p.setProcessChannelMode(QProcess::MergedChannels);
+    // Build args manually so we control quoting
+    QString cmd = m_containerCmd + " sudo pacman -Ss " + query;
+    p.start("/bin/sh", {"-c", cmd});
+    if (!p.waitForStarted(5000) || !p.waitForFinished(30000)) {
+        emit error("搜索失败：无法连接到容器或超时");
+        return;
+    }
+
+    const auto out = QString::fromUtf8(p.readAll());
+    const auto lines = out.split('\n');
+
+    QVariantList results;
+    for (int i = 0; i + 1 < lines.size(); ++i) {
+        const auto& line = lines[i].trimmed();
+        if (line.isEmpty()) continue;
+        // Format: "blackarch/<pkg> <version>"
+        // Followed by: "    <description>"
+        if (!line.startsWith("blackarch/") && !line.startsWith("extra/") &&
+            !line.startsWith("core/") && !line.startsWith("community/") &&
+            !line.startsWith("multilib/") && !line.startsWith("archlinux/"))
+            continue;
+        const int slash = line.indexOf('/');
+        const int space = line.indexOf(' ', slash + 1);
+        if (slash < 0 || space < 0) continue;
+        const QString repo = line.left(slash);
+        const QString pkgName = line.mid(slash + 1, space - slash - 1).trimmed();
+        const QString version = line.mid(space + 1).trimmed();
+
+        // Next line should be the description (indented)
+        QString description;
+        if (i + 1 < lines.size()) {
+            const auto& next = lines[i + 1].trimmed();
+            if (!next.contains('/') && !next.isEmpty()) {
+                // Remove leading whitespace grouping
+                static const QRegularExpression re("^\\s+");
+                description = next;
+                description.replace(re, "");
+                ++i; // consume description line
+            }
+        }
+
+        // Skip already-installed tools — check if a .desktop file already exists
+        if (QFile::exists(homePath() + "/.local/share/applications/blackarch/ba-" + pkgName + ".desktop") ||
+            QFile::exists(homePath() + "/.local/share/applications/blackarch/ba-gui-" + pkgName + ".desktop"))
+            continue;
+
+        QVariantMap item;
+        item["name"] = pkgName;
+        item["version"] = version;
+        item["description"] = description;
+        item["repo"] = repo;
+        results.append(item);
+    }
+
+    m_searchResults = results;
+    emit searchResultsChanged();
+}
+
+void Backend::installTool(const QString& name, const QString& categoryTag,
+                           bool isTerminal, const QString& iconPath) {
+    m_isInstalling = true;
+    m_installStatus = "正在安装 " + name + " ...";
+    m_installLog.clear();
+    m_pendingToolName = name;
+    m_pendingCategoryTag = categoryTag;
+    m_pendingIsTerminal = isTerminal;
+    m_pendingIconPath = iconPath;
+    emit installStateChanged();
+    emit installLogChanged();
+
+    // Kill any stale install process
+    if (m_installProc) {
+        m_installProc->kill();
+        m_installProc->deleteLater();
+    }
+
+    auto* proc = new QProcess(this);
+    m_installProc = proc;
+    proc->setProcessChannelMode(QProcess::MergedChannels);
+
+    // Feed live output line-by-line into installLog
+    QObject::connect(proc, &QProcess::readyRead, this, [this, proc]() {
+        while (proc->canReadLine()) {
+            QString line = QString::fromUtf8(proc->readLine().trimmed());
+            if (!line.isEmpty()) {
+                if (!m_installLog.isEmpty()) m_installLog += '\n';
+                m_installLog += line;
+                emit installLogChanged();
+            }
+        }
+    });
+
+    QObject::connect(proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                     this, [this, proc](int exitCode, QProcess::ExitStatus) {
+        m_installProc = nullptr;
+        if (exitCode != 0) {
+            finishInstall(false, "安装失败 (exit " + QString::number(exitCode) + ")");
+        } else {
+            finishInstall(true, QString());
+        }
+        proc->deleteLater();
+    });
+
+    QString installCmd = m_containerCmd + " sudo pacman -S --noconfirm " + name;
+    proc->start("/bin/sh", {"-c", installCmd});
+}
+
+void Backend::finishInstall(bool success, const QString& message) {
+    // Always save install log to file (success or failure)
+    {
+        const QString logDir = homePath() + "/.cache/blackarch-launcher/install-logs/";
+        QDir().mkpath(logDir);
+        QString logName = m_pendingToolName.isEmpty() ? "unknown" : m_pendingToolName;
+        if (!success) logName += "-FAILED";
+        const QString logPath = logDir + logName + "-"
+            + QDateTime::currentDateTime().toString("yyyyMMdd-hhmmss") + ".log";
+        QFile lf(logPath);
+        if (lf.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+            lf.write(m_installLog.toUtf8());
+            lf.close();
+        }
+    }
+
+    if (!success) {
+        m_installLog += "\n✗ 失败: " + message;
+        emit installLogChanged();
+        m_isInstalling = false;
+        m_installStatus.clear();
+        emit installStateChanged();
+        emit installFinished(false, message.isEmpty() ? "安装失败" : message);
+        return;
+    }
+
+    const QString& name = m_pendingToolName;
+    const QString& categoryTag = m_pendingCategoryTag;
+    bool isTerminal = m_pendingIsTerminal;
+    const QString& iconPath = m_pendingIconPath;
+
+    m_installStatus = "正在检测工具类型...";
+    m_installLog += "\n--- 检测中... ---";
+    emit installStateChanged();
+    emit installLogChanged();
+
+    const QString iconsDir = homePath() + "/.local/share/icons/blackarch-tools/";
+    const QString appsDir = homePath() + "/.local/share/applications/blackarch/";
+    QDir().mkpath(appsDir);
+
+    // Auto-detect CLI / GUI by checking package contents in container
+    bool detectedGui = false;
+    QStringList pkgFiles;
+    {
+        QProcess p;
+        p.setProcessChannelMode(QProcess::MergedChannels);
+        QString listCmd = m_containerCmd + " pacman -Ql " + name;
+        p.start("/bin/sh", {"-c", listCmd});
+        if (p.waitForStarted(5000) && p.waitForFinished(15000)) {
+            const auto out = QString::fromUtf8(p.readAll());
+            for (const auto& line : out.split('\n')) {
+                int space = line.indexOf(' ');
+                if (space < 0) continue;
+                QString fpath = line.mid(space + 1).trimmed();
+                if (!fpath.isEmpty()) pkgFiles.append(fpath);
+            }
+        }
+    }
+
+    for (const auto& f : pkgFiles) {
+        if (f.endsWith(".desktop") && (f.contains("/applications/") || f.contains("/xsessions/"))) {
+            detectedGui = true;
+            break;
+        }
+    }
+
+    bool finalIsTerminal = isTerminal;
+    if (detectedGui && isTerminal) {
+        finalIsTerminal = false;
+    }
+
+    // Extract native icons from container
+    QString finalIcon;
+    QStringList containerIcons;
+    for (const auto& f : pkgFiles) {
+        const auto lower = f.toLower();
+        if ((lower.endsWith(".png") || lower.endsWith(".svg")) &&
+            (lower.contains("/icons/") || lower.contains("/pixmaps/") ||
+             lower.contains("/applications/"))) {
+            containerIcons.append(f);
+            if (containerIcons.size() >= 5) break;
+        }
+    }
+
+    if (!containerIcons.isEmpty()) {
+        QString bestIcon;
+        for (const auto& ic : containerIcons) {
+            if (ic.contains(name, Qt::CaseInsensitive)) { bestIcon = ic; break; }
+        }
+        if (bestIcon.isEmpty()) bestIcon = containerIcons.first();
+
+        QString tmpIcon = "/tmp/ba-icon-" + name;
+        QProcess cp;
+        cp.start("podman", {"cp", "blackarch:" + bestIcon, tmpIcon});
+        if (cp.waitForStarted(5000) && cp.waitForFinished(10000) && cp.exitCode() == 0) {
+            QFileInfo fi(bestIcon);
+            const QString dstIcon = iconsDir + name + "." + fi.suffix();
+            QDir idir(iconsDir);
+            const auto existing = idir.entryInfoList({name + ".*"}, QDir::Files);
+            for (const auto& old : existing) QFile::remove(old.absoluteFilePath());
+            QFile::rename(tmpIcon, dstIcon);
+            finalIcon = dstIcon;
+        }
+    }
+
+    if (finalIcon.isEmpty() && !iconPath.isEmpty() && QFile::exists(iconPath)) {
+        QFileInfo fi(iconPath);
+        const QString dstIcon = iconsDir + name + "." + fi.suffix();
+        QDir idir(iconsDir);
+        const auto existing = idir.entryInfoList({name + ".*"}, QDir::Files);
+        for (const auto& old : existing) QFile::remove(old.absoluteFilePath());
+        QFile::copy(iconPath, dstIcon);
+        finalIcon = dstIcon;
+    }
+
+    QString description;
+    for (const auto& r : m_searchResults) {
+        const auto m = r.toMap();
+        if (m.value("name").toString() == name) {
+            description = m.value("description").toString();
+            break;
+        }
+    }
+
+    QString desktopFileName;
+    QString execLine;
+    if (!finalIsTerminal) {
+        desktopFileName = "ba-gui-" + name + ".desktop";
+        execLine = m_containerCmd + " " + name;
+    } else {
+        desktopFileName = "ba-" + name + ".desktop";
+        execLine = m_terminalCmd + " -e ba-cli-run " + name;
+    }
+
+    DesktopEntry entry;
+    entry.name = name;
+    entry.genericName = description;
+    entry.comment = description + " (BlackArch container)";
+    entry.exec = execLine;
+    entry.icon = finalIcon;
+    entry.terminal = false;
+    entry.categories = QStringList{"Security", "X-BlackArch-" + categoryTag,
+                                    finalIsTerminal ? "X-BlackArch-CLI" : "X-BlackArch-GUI"};
+    entry.keywords = QStringList{"blackarch", "security", "pentest"};
+
+    const QString desktopPath = appsDir + desktopFileName;
+    if (!DesktopParser::writeDesktopFile(desktopPath, entry)) {
+        m_isInstalling = false;
+        m_installStatus.clear();
+        emit installStateChanged();
+        emit installFinished(false, "无法写入 .desktop 文件：" + desktopPath);
+        return;
+    }
+
+    if (finalIsTerminal)
+        appendBaCliRun(name, description);
+
+    QProcess::startDetached("update-desktop-database", {homePath() + "/.local/share/applications"});
+    QProcess::startDetached("kbuildsycoca6", {"--noincremental"});
+
+    scanTools();
+
+    m_isInstalling = false;
+    m_installStatus.clear();
+    m_installLog += "\n✓ 完成";
+    emit installLogChanged();
+    m_searchResults.clear();
+    emit installStateChanged();
+    emit searchResultsChanged();
+    emit installFinished(true, name + " 安装完成！");
+}
+
+void Backend::changeToolIcon(const QString& toolName, const QString& newIconPath) {
+    if (toolName.isEmpty() || newIconPath.isEmpty() || !QFile::exists(newIconPath)) {
+        emit error("无法更换图标：文件不存在");
+        return;
+    }
+
+    // Find the tool entry
+    const auto& entries = m_tree ? m_tree->entries() : QList<DesktopEntry>{};
+    QString desktopPath;
+    for (const auto& e : entries) {
+        if (e.name == toolName) {
+            desktopPath = e.path;
+            break;
+        }
+    }
+    if (desktopPath.isEmpty()) {
+        emit error("无法找到工具 " + toolName + " 的桌面文件");
+        return;
+    }
+
+    // Remove all old icon files for this tool, then copy the new one
+    const QString iconsDir = homePath() + "/.local/share/icons/blackarch-tools/";
+    QDir().mkpath(iconsDir);
+    QDir idir(iconsDir);
+    const auto existing = idir.entryInfoList({toolName + ".*"}, QDir::Files);
+    for (const auto& old : existing) QFile::remove(old.absoluteFilePath());
+
+    QFileInfo fi(newIconPath);
+    const QString ext = fi.suffix();
+    const QString dstIcon = iconsDir + toolName + "." + ext;
+    QFile::copy(newIconPath, dstIcon);
+
+    // Update .desktop file Icon= field
+    if (!DesktopParser::updateDesktopIcon(desktopPath, dstIcon)) {
+        emit error("无法更新桌面文件图标");
+        return;
+    }
+
+    // Rescan to refresh UI
+    scanTools();
+}
+
+void Backend::appendBaCliRun(const QString& name, const QString& description) {
+    const QString scriptPath = homePath() + "/.local/bin/ba-cli-run";
+    QFile f(scriptPath);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) return;
+
+    QString content = QString::fromUtf8(f.readAll());
+    f.close();
+
+    // Find the DESC array and the trailing ")" that closes it
+    static const QRegularExpression descRe("(declare\\s+-A\\s+DESC=)");
+    auto m = descRe.match(content);
+    if (!m.hasMatch()) return;
+
+    // Find the closing ")" of the associative array (the one on its own line after all entries)
+    int arrayStart = m.capturedEnd();
+    // Find the last ")" on a line by itself after the array start
+    int closeParen = content.lastIndexOf('\n');
+    while (closeParen > arrayStart) {
+        const auto line = content.mid(content.lastIndexOf('\n', closeParen - 1) + 1,
+                                       closeParen - content.lastIndexOf('\n', closeParen - 1) - 1).trimmed();
+        if (line == ")") break;
+        closeParen = content.lastIndexOf('\n', closeParen - 1);
+    }
+    if (closeParen <= arrayStart) return;
+
+    // Insert the new entry before the closing paren
+    QString desc = description.isEmpty() ? name : description;
+    desc.replace('"', "\\\"");
+    QString entry = QStringLiteral("    [%1]=\"%2\"\n").arg(name, desc);
+    content.insert(closeParen, entry);
+
+    if (f.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        f.write(content.toUtf8());
+        f.close();
+    }
+}
+
+// ── install log files ────────────────────────────────────────────────────────
+
+QVariantList Backend::installLogFiles() const {
+    const QString logDir = homePath() + "/.cache/blackarch-launcher/install-logs/";
+    QDir d(logDir);
+    QVariantList result;
+    const auto files = d.entryInfoList({"*.log"}, QDir::Files, QDir::Time); // newest first
+    for (const auto& fi : files) {
+        QVariantMap m;
+        m["name"] = fi.baseName();  // e.g. "nmap-20260609-091234"
+        m["path"] = fi.absoluteFilePath();
+        m["date"] = fi.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+        m["size"] = fi.size();
+        result.append(m);
+    }
+    return result;
+}
+
+QString Backend::readInstallLogFile(const QString& path) const {
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) return {};
+    return QString::fromUtf8(f.readAll());
 }
 
 // ── usage hints ─────────────────────────────────────────────────────────────

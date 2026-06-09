@@ -41,6 +41,8 @@ qt_add_qml_module(blackarch-launcher
         qml/ToolTree.qml
         qml/DetailsPane.qml
         qml/CornerSprite.qml
+        qml/AddToolDialog.qml
+        qml/InstallLogDialog.qml
 )
 
 target_link_libraries(blackarch-launcher PRIVATE

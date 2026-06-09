@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QSet>
+#include <QRegularExpression>
 
 namespace {
 
@@ -80,4 +81,53 @@ QString DesktopParser::cleanExec(QString exec) {
     static const QStringList codes = {"%f","%F","%u","%U","%i","%c","%k"};
     for (const auto& c : codes) exec.remove(c);
     return exec.simplified();
+}
+
+bool DesktopParser::writeDesktopFile(const QString& path, const DesktopEntry& entry) {
+    QFile f(path);
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return false;
+    QTextStream out(&f);
+    out.setEncoding(QStringConverter::Utf8);
+    out << "[Desktop Entry]\n"
+        << "Type=Application\n"
+        << "Version=1.0\n"
+        << "Name=" << entry.name << "\n";
+    if (!entry.genericName.isEmpty())
+        out << "GenericName=" << entry.genericName << "\n";
+    if (!entry.comment.isEmpty())
+        out << "Comment=" << entry.comment << "\n";
+    out << "Exec=" << entry.exec << "\n";
+    if (!entry.icon.isEmpty())
+        out << "Icon=" << entry.icon << "\n";
+    out << "Terminal=" << (entry.terminal ? "true" : "false") << "\n";
+    if (!entry.categories.isEmpty())
+        out << "Categories=" << entry.categories.join(';') << ";\n";
+    if (!entry.keywords.isEmpty())
+        out << "Keywords=" << entry.keywords.join(';') << ";\n";
+    return true;
+}
+
+bool DesktopParser::updateDesktopIcon(const QString& path, const QString& newIconPath) {
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) return false;
+    QString content = QString::fromUtf8(f.readAll());
+    f.close();
+
+    // Replace existing Icon= line or append after [Desktop Entry]
+    static const QRegularExpression iconRe("^Icon=.*$", QRegularExpression::MultilineOption);
+    if (content.contains(iconRe)) {
+        content.replace(iconRe, "Icon=" + newIconPath);
+    } else {
+        // Insert after the [Desktop Entry] line
+        static const QRegularExpression deRe("^\\[Desktop Entry\\]$", QRegularExpression::MultilineOption);
+        auto m = deRe.match(content);
+        if (m.hasMatch()) {
+            int pos = m.capturedEnd();
+            content.insert(pos, "\nIcon=" + newIconPath);
+        }
+    }
+
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) return false;
+    f.write(content.toUtf8());
+    return true;
 }

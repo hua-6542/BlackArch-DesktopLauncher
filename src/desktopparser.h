@@ -25,4 +25,8 @@ public:
     static DesktopEntry parseFile(const QString& path);
     // Strip %f/%u/%U/%F/%i/%c/%k field codes per the Desktop Entry Spec.
     static QString cleanExec(QString exec);
+    // Write a .desktop file from a DesktopEntry struct.
+    static bool writeDesktopFile(const QString& path, const DesktopEntry& entry);
+    // Update only the Icon= field in an existing .desktop file.
+    static bool updateDesktopIcon(const QString& path, const QString& newIconPath);
 };
